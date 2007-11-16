@@ -1,0 +1,145 @@
+= Trac 플러그인 =
+[[TracGuideToc]]
+
+Since version 0.9, Trac supports plugins that extend the built-in functionality. The plugin functionality is based on the [http://trac.edgewall.org/wiki/TracDev/ComponentArchitecture component architecture].
+
+== 요구사항 ==
+
+To use egg based plugins in Trac, you need to have [http://peak.telecommunity.com/DevCenter/setuptools setuptools] (version 0.6) installed.
+
+Plugins can also consist of a single `.py` file dropped into either the environment or global `plugins` directory ''(since [milestone:0.10])''.
+
+`setuptools`을 설치하기 위해서는, [http://peak.telecommunity.com/dist/ez_setup.py ez_setup.py] 부트스트랩 모듈을 다운로드 받아서, 다음과 같이 실행하십시오.:
+{{{
+$ python ez_setup.py
+}}}
+
+만약 `ez_setup.py` 스트립트가 setuptools을 설치하지 못한다면, [http://www.python.org/pypi/setuptools PyPI]로부터 직접 다운로드 받아서, 수동으로 설치할 수 있습니다.
+
+== Trac 플러그인 설치하기 ==
+
+=== 하나의 프로젝트에 대해서 ===
+
+플러그인들은 [http://peak.telecommunity.com/DevCenter/PythonEggs Python eggs]로 패키지되어있습니다. 이것은 파일 확장자가 `.egg`인 zip 압축파일을 의미합니다. 만약 소스 형태의 플러그인을 다운받았다면, `.egg` 파일을 만들기 위해서 다음과 같이 실행할 수 있습니다.:
+{{{
+$ python setup.py bdist_egg
+}}}
+
+플러그인 파일을 가지고 있다면, 프로젝트의 [wiki:TracEnvironment Trac 저장소]의 `plugins` 디렉토리에 복사하셔야 합니다. 또한 웹서버에서 플러그인을 읽을 수 있는 권한을 가지고 있는지 확인하십시오.
+
+Note that the Python version that the egg is built with must
+match the Python version with which Trac is run.  If for
+instance you are running Trac under Python 2.3, but have
+upgraded your standalone Python to 2.4, the eggs won't be
+recognized.
+
+=== 모든 프로젝트에 대해서 ===
+
+==== With an .egg file ====
+
+Some plugins (such as [http://trac.edgewall.org/wiki/WebAdmin WebAdmin]) are downloadable as a `.egg` file which can be installed with the `easy_install` program:
+{{{
+easy_install TracWebAdmin-0.1.1dev_r2765-py2.3.egg
+}}}
+
+If `easy_install` is not on your system see the Requirements section above to install it.  Windows users will need to add the `Scripts` directory of their Python installation (for example, `C:\Python23\Scripts`) to their `PATH` environment variable (see [http://peak.telecommunity.com/DevCenter/EasyInstall#windows-notes easy_install Windows notes] for more information).
+
+If Trac reports permission errors after installing a zipped egg and you would rather not bother providing a egg cache directory writable by the web server, you can get around it by simply unzipping the egg. Just pass `--always-unzip` to `easy_install`:
+{{{
+easy_install --always-unzip TracWebAdmin-0.1.1dev_r2765-py2.3.egg
+}}}
+You should end up with a directory having the same name as the zipped egg (complete with `.egg` extension) and containing its uncompressed contents.
+
+Trac also searches for globally installed plugins under `$prefix/share/trac/plugins` ''(since 0.10)''.
+
+==== From source ====
+
+If you downloaded the plugin's source from Subversion, or a source zip file you can install it using the included `setup.py`:
+{{{
+$ python setup.py install
+}}}
+
+==== Enabling the plugin ====
+Unlike plugins installed per-environment, you'll have to explicitly enable globally installed plugins via [wiki:TracIni trac.ini]. This is done in the `[components]` section of the configuration file, for example:
+{{{
+[components]
+webadmin.* = enabled
+}}}
+
+The name of the option is the Python package of the plugin. This should be specified in the documentation of the Plugin, but can also be easily find out by looking at the source (look for a top-level directory that contains a file named `__init__.py`.)
+
+Note: After installing the plugin, you may need to restart Apache.
+
+== 플러그인 캐시 설정하기 ==
+
+일부 플러그인들은 파일시스템상에 플러그인의 파일들이 실제 파일로 존재해야하기 때문에 실행시(`pkg_resources`)에 Python eggs에 의해서 압축이 풀어져야 합니다. 기본적으로 압축이 풀리는 디렉토리는 현재 사용자의 홈디렉토리입니다. 이것은 문제가 있을 수도, 없을 수도 있습니다. `PYTHON_EGG_CACHE` 환경변수를 사용해서 기본 위치를 변경할 수 있습니다.
+
+아파치 설정에서 이렇게 하기위해서는, 다음과 같이 `SetEnv` 지시자를 사용하십시오.:
+{{{
+SetEnv PYTHON_EGG_CACHE /path/to/dir
+}}}
+
+[wiki:TracCgi CGI]나 [wiki:TracModPython mod_python]을 사용하는 경우에 이것을 정상적으로 동작할 것입니다. 이 지시자를 [wiki:TracEnvironment Trac 저장소]의 경로를 설정한 다음에 넣으십시오. 즉, 같은 `<Location>` 블럭안에 넣으십시오.
+
+This works whether you are using the [wiki:TracCgi CGI] or the [wiki:TracModPython mod_python] front-end. Put this directive next to where you set the path to the [wiki:TracEnvironment Trac environment], i.e. in the same `<Location>` block.
+
+예를 들면 (CGI의 경우):
+{{{
+ <Location /trac>
+   SetEnv TRAC_ENV /path/to/projenv
+   SetEnv PYTHON_EGG_CACHE /path/to/dir
+ </Location>
+}}}
+
+혹은 (mod_python의 경우):
+{{{
+ <Location /trac>
+   SetHandler mod_python
+   ...
+   SetEnv PYTHON_EGG_CACHE /path/to/dir
+ </Location>
+}}}
+
+ ''Note: this requires the `mod_env` module''
+
+[wiki:TracFastCgi FastCGI]에 대해서는, `-initial-env` 옵션이나 환경변수를 설정하기 위해 사용중인 웹서버에서 제공되는 것이 필요할 것입니다.
+
+=== About hook scripts ===
+
+If you have set up some subversion hook scripts that call the Trac engine - such as the post-commit hook script provided in the `/contrib` directory - make sure you define the `PYTHON_EGG_CACHE` environment variable within these scripts as well.
+
+== Troubleshooting ==
+
+=== Is setuptools properly installed? ===
+
+Try this from the command line:
+{{{
+$ python -c "import pkg_resources"
+}}}
+
+If you get '''no output''', setuptools '''is''' installed. Otherwise, you'll need to install it before plugins will work in Trac.
+
+=== Did you get the correct version of the Python egg? ===
+
+Python eggs have the Python version encoded in their filename. For example, `MyPlugin-1.0-py2.4.egg` is an egg for Python 2.4, and will '''not''' be loaded if you're running a different Python version (such as 2.3 or 2.5).
+
+Also, verify that the egg file you downloaded is indeed a ZIP archive. If you downloaded it from a Trac site, chances are you downloaded the HTML preview page instead.
+
+=== Is the plugin enabled? ===
+
+If you install a plugin globally (i.e. ''not'' inside the `plugins` directory of the Trac project environment) you will have to explicitly enable it in [TracIni trac.ini]. Make sure that:
+ * you actually added the necessary line(s) to the `[components]` section
+ * the package/module names are correct
+ * if you're reference a module (as opposed to a class), you've appended the necessary ??*??
+ * the value is ?쐃nabled", not e.g. ?쐃nable??
+
+=== Check the permissions on the egg file ===
+
+Trac must of course be able to read the file. Yeah, you knew that ;-)
+
+=== Check the log files ===
+
+Enable [TracLogging logging] in Trac, set the log level to `DEBUG` and then watch the log file for messages about loading plugins.
+
+----
+참고 : TracGuide, [http://trac.edgewall.org/wiki/PluginList plugin list], [http://trac.edgewall.org/wiki/TracDev/ComponentArchitecture component architecture]

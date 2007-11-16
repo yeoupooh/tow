@@ -1,0 +1,24 @@
+= Trac 시간이력 =
+[[TracGuideToc]]
+
+시간이력은 하나의 페이지에 프로젝트의 변경사항을 보여줍니다.
+
+Trac의 시간이력은 발생한 모든 이벤트를 시간순으로 상세한 설명과 누가 변경했는지를 함께 나열해서 보여줍니다.
+
+시간이력은 다음 종류의 이벤트를 나열해서 보여줍니다.:
+ * '''위키 페이지 이벤트''' -- 생성과 변경사항
+ * '''Ticket events''' -- Creation and resolution/closing (and optionally other changes)
+ * '''Source code changes ''' -- Repository check-ins
+ * '''Milestone ''' -- Milestone completed
+
+Each event entry provides a hyperlink to the specific event in question, as well as
+a brief excerpt of the actual comment or text, if available.
+
+See [wiki:TracIni#timeline TracIni] for timeline configuration options.
+
+== RSS 지원 ==
+
+The Timeline module supports subscription using RSS 2.0 syndication. To subscribe to project events, click orange '''XML''' icon at the bottom of the page. See TracRss for more information on RSS support in Trac.
+
+----
+참고 : TracGuide, TracWiki, WikiFormatting, TracRss, TracNotification

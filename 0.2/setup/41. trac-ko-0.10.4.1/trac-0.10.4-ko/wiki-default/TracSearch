@@ -1,0 +1,32 @@
+= 검색하기 =
+
+Trac은 키워드, 위키페이지의 스트링, 티켓 그리고 변경사항의 설명에 대해서 검색할 수 있는 검색 엔진을 내장하고 있습니다.
+
+Using the Trac search facility is straightforward and its interface should be familiar to most users.
+
+[search: 검색 모듈]과는 별도로, 네비게이션 바의 위에서 작은 검색 창을 항상 볼 수 있을 것입니다. 이것은 모든 페이지에서 검색 모듈을 이용할 수 있게 해주는 편리한 방법을 제공합니다.
+
+== "Quickjump" searches ==
+For quick access to various project resources, the quick-search field at the top of every page can be used to enter a [TracLinks wiki link], which will take you directly to the resource identified by that link.
+
+예를 들면:
+
+ * ![42] -- 변경사항 42번을 엽니다.
+ * !#42 -- 티켓 42번을 엽니다.
+ * !{1} -- 리포트 1번을 엽니다.
+ * /trunk -- Opens the browser for the `trunk` directory
+
+== Advanced ==
+
+=== Disabling Quickjumps ===
+To disable the quickjump feature for a search keyword - for example when searching for occurences of the literal word !TracGuide - begin the query with an exclamation mark (!).
+
+=== Search Links ===
+From the Wiki, it is possible to link to a specific search, using
+`search:` links:
+ * `search:?q=crash` will search for the string "crash" 
+ * `search:?q=trac+link&wiki=on` will search for "trac" and "link" 
+   in wiki pages only
+
+----
+참고 : TracGuide, TracLinks, TracQuery

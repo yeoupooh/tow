@@ -1,0 +1,131 @@
+= Wiki 프로세서 =
+
+Processors are WikiMacros designed to provide alternative markup formats for the [TracWiki Wiki engine]. Processors can be thought of as ''macro functions to process user-edited text''. 
+
+The Wiki engine uses processors to allow using [wiki:WikiRestructuredText Restructured Text], [wiki:WikiHtml raw HTML] and [http://www.textism.com/tools/textile/ textile] in any Wiki text throughout Trac.
+
+
+== 프로세서 사용하기 ==
+
+To use a processor on a block of text, use a Wiki code block, selecting a processor by name using ''shebang notation'' (#!), familiar to most UNIX users from scripts.
+
+'''예제 1''' (''위키 텍스트에 raw HTML 삽입하기''):
+
+{{{
+#!html
+<pre class="wiki">{{{
+#!html
+&lt;h1 style="color: orange"&gt;This is raw HTML&lt;/h1&gt;
+}}}</pre>
+}}}
+
+'''결과 화면:'''
+{{{
+#!html
+<h1 style="color: orange">This is raw HTML</h1>
+}}}
+
+----
+
+'''예제 2''' (''위키 텍스트에 Restructured Text 삽입하기''):
+
+{{{
+#!html
+<pre class="wiki">{{{
+#!rst
+A header
+--------
+This is some **text** with a footnote [*]_.
+
+.. [*] This is the footnote.
+}}}</pre>
+}}}
+
+'''결과 화면:'''
+{{{
+#!rst
+A header
+--------
+This is some **text** with a footnote [*]_.
+
+.. [*] This is the footnote.
+}}}
+----
+'''예제 3''' (''위키 텍스트에 C 소스 코드 삽입하기''):
+
+{{{
+#!html
+<pre class="wiki">{{{
+#!c
+int main(int argc, char *argv[])
+{
+  printf("Hello World\n");
+  return 0;
+}
+}}}</pre>
+}}}
+
+'''결과 화면:'''
+{{{
+#!c
+int main(int argc, char *argv[])
+{
+  printf("Hello World\n");
+  return 0;
+}
+}}}
+
+----
+
+== 이용 가능한 프로세서들 ==
+다음의 프로세서들이 Trac 배포판에 포함되어 있습니다.
+ * '''html''' -- 위키 페이지에 raw HTML 을 삽입합니다.. 참고 : [wiki:WikiHtml].
+ * '''rst''' -- Trac은 Restructured Text를 지원합니다. 참고 : [wiki:WikiRestructuredText].
+ * '''textile''' -- Supported if  [http://dealmeida.net/projects/textile/ Textile] is installed. See [http://hobix.com/textile/ a Textile reference].
+
+Textile link above is rotten. [http://www.textism.com/tools/textile/ this one] works, allows to test example.
+
+=== 코드 하이라이팅 지원 ===
+Trac includes processors to provide inline [wiki:TracSyntaxColoring syntax highlighting] for the following languages:
+ * '''c''' -- C
+ * '''cpp''' -- C++
+ * '''python''' -- Python
+ * '''perl''' -- Perl
+ * '''ruby''' -- Ruby
+ * '''php''' -- PHP
+ * '''asp''' --- ASP
+ * '''sql''' -- SQL
+ * '''xml''' -- XML
+'''주의:''' ''Trac은 syntax coloring을 위해서 외부의 소프트웨어 패키지에 의존합니다. 더 많은 정보가 필요하다면 [wiki:TracSyntaxColoring] 페이지를 참고하십시오.''
+
+By using the MIME type as processor, it is possible to syntax-highlight the same languages that are supported when browsing source code. For example, you can write:
+{{{
+{{{
+#!text/html
+<h1>text</h1>
+}}}
+}}}
+
+The result will be syntax highlighted HTML code. The same is valid for all other mime types supported.
+
+
+For more processor macros developed and/or contributed by users, visit: 
+ * [http://projects.edgewall.com/trac/wiki/ProcessorBazaar ProcessorBazaar]
+ * [http://projects.edgewall.com/trac/wiki/MacroBazaar MacroBazaar]
+
+
+== 진보된 주제들: 프로세서 매크로 개발하기 ==
+프로세서를 개발하는 것은 [wiki:WikiMacros]와 다르지 않습니다. 사실 같은 방식으로 동작합니다. 단지 usage syntax가 틀립니다. 더 많은 정보가 필요하다면 [wiki:WikiMacros] 페이지를 참고하십시오.
+
+'''예제:''' (''Restructured Text 프로세서''):
+{{{
+#!python
+from docutils.core import publish_string
+
+def execute(hdf, text, env):
+    html = publish_string(text, writer_name = 'html')
+    return html[html.find('<body>')+6:html.find('</body>')].strip()
+}}}
+
+----
+참고 : WikiMacros, WikiHtml, WikiRestructuredText, TracSyntaxColoring, WikiFormatting, TracGuide

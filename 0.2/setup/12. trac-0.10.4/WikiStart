@@ -1,0 +1,97 @@
+= Welcome to TOW (Trac On Windows) =
+ * Project Site: [http://sourceforge.net/projects/traconwindows]
+ * Author: Jinwoo Min (yeoupooh at gmail dot com)
+ * License: http://creativecommons.org/licenses/by-sa/2.0/
+ 
+== TOW 0.2 Base package includes ==
+ * python 2.4.4
+ * trac 0.10.4
+ * clearsilver 0.9.14
+ * apache 2.2.6
+ * mod_python 3.3.1
+ * subversion 1.4.5
+ * svn-python 1.4.5
+ * sqlite 3.5.2
+ * pysqlite 2.3.5
+ * easy_install
+ 
+= TOW Installation =
+
+== Installation ==
+ * Unzip TOW-*.zip to C:\ (not available in other folders)
+ * Run start-tow.bat
+{{{
+C:\TOW>start-tow.bat
+}}}
+ * That's it!
+
+== Test ==
+ * Go http://localhost:8008/projects/HelloTOW
+
+= TOW Administration =
+ * Default admin user is admin/towadmin
+
+== Add New User ==
+{{{
+C:\TOW>add-user.bat <UserName> <Password>
+}}}
+
+== Add New Project ==
+{{{
+C:\TOW>create-svn-repo.bat <ProjectName>
+C:\TOW>create-trac-repo.bat <ProjectName>
+}}}
+ 
+== How to run trac-admin ==
+{{{
+C:\TOW>trac-admin.bat <ProjectName> <Commands>
+}}}
+ * More details in [http://trac.edgewall.org/wiki/TracAdmin TracAdmin]
+ 
+== How to run easy_install ==
+{{{
+C:\TOW>easy_install.bat <Arguments>
+}}}
+ * More details in [http://peak.telecommunity.com/DevCenter/EasyInstall EasyInstall]
+
+
+ 
+= Welcome to Trac 0.10.4 =
+
+Trac is a '''minimalistic''' approach to '''web-based''' management of
+'''software projects'''. Its goal is to simplify effective tracking and handling of software issues, enhancements and overall progress.
+
+All aspects of Trac have been designed with the single goal to 
+'''help developers write great software''' while '''staying out of the way'''
+and imposing as little as possible on a team's established process and
+culture.
+
+As all Wiki pages, this page is editable, this means that you can
+modify the contents of this page simply by using your
+web-browser. Simply click on the "Edit this page" link at the bottom
+of the page. WikiFormatting will give you a detailed description of
+available Wiki formatting commands.
+
+"[wiki:TracAdmin trac-admin] ''yourenvdir'' initenv" created
+a new Trac environment, containing a default set of wiki pages and some sample
+data. This newly created environment also contains 
+[wiki:TracGuide documentation] to help you get started with your project.
+
+You can use [wiki:TracAdmin trac-admin] to configure
+[http://trac.edgewall.org/ Trac] to better fit your project, especially in
+regard to ''components'', ''versions'' and ''milestones''. 
+
+
+TracGuide is a good place to start.
+
+Enjoy! [[BR]]
+''The Trac Team''
+
+== Starting Points ==
+
+ * TracGuide --  Built-in Documentation
+ * [http://trac.edgewall.org/ The Trac project] -- Trac Open Source Project
+ * [http://trac.edgewall.org/wiki/TracFaq Trac FAQ] -- Frequently Asked Questions
+ * TracSupport --  Trac Support
+
+For a complete list of local wiki pages, see TitleIndex.

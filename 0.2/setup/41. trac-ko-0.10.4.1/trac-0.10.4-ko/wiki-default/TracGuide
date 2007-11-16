@@ -1,0 +1,34 @@
+= Trac 사용자 및 관리자 가이드 =
+[[TracGuideToc]]
+
+[wiki:TracGuide] 페이지는 Trac의 사용과 개발에 관련된 모든 문서의 시작 페이지입니다. 이 가이드 문서는 free 문서이며, collaborative의 결과물이며, [http://projects.edgewall.com/trac/ Trac 프로젝트]의 일부분입니다.
+
+== 목록 ==
+현재 이용 가능한 문서들:
+ * TracGuide (이 문서)  -- 모든 문서의 시작페이지
+   * TracInstall -- Trac을 설치 및 운영하기.
+   * TracUpgrade -- 설치된 Trac을 업그레이드하기.
+   * TracAdmin -- Trac 프로젝트 관리하기.
+   * TracImport -- 다른 버그 데이타베이스로부터 티켓들을 추가하기.
+   * TracIni -- Trac의 환경 설정 파일에 대해서.
+   * TracPermissions -- 접근제어와 권한.
+   * TracInterfaceCustomization -- Trac 인터페이스를 개별적으로 설정하기.
+   * TracPlugins -- Trac의 확장 기능을 설치하고 관리하기.
+   * TracWiki -- 내장된 위키를 어떻게 사용하는가?
+   * TracBrowser -- Trac에서 소스코드 브라우징하기.
+   * TracChangeset -- 소스코드의 변경사항 보기.
+   * TracTickets -- 이슈 트랙커 사용하기.
+   * TracReports -- 리포트를 만들고 사용하기.
+   * TracQuery -- 사용자별 티켓 쿼리 실행시키기.
+   * TracRoadmap -- 로드맵은 프로젝트의 진행상황을 추적할 수 있게 해줍니다.
+   * TracTimeline -- 시간이력은 전체 프로젝트의 변경과정을 볼 수 있게 해줍니다.
+   * TracLogging -- Trac의 로깅 기능에 대해서.
+   * TracRss -- Trac에서의 RSS 지원.
+   * TracNotification -- Email 통지 기능.
+
+ * [http://projects.edgewall.com/trac/wiki/TracFaq Trac FAQ] - 자주 질문되는 내용들 (프로젝트 웹사이트에 있는)
+
+== Trac 지원하기, 그리고 정보를 얻을 수 있는 다른 곳 ==
+Trac에 대해서 질문할 수 있는 곳을 찾는다면, [http://projects.edgewall.com/trac/wiki/MailingList 메일링 리스트]가 가장 좋습니다. 그곳에서는 Trac 사용자와 개발자 사이에 자유로운 토론의 환경이 제공됩니다.
+
+더 많은 정보가 필요하다면 [wiki:TracSupport] 페이지를 참고하십시오.

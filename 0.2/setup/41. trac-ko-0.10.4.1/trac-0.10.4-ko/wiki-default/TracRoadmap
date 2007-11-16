@@ -1,0 +1,32 @@
+= Trac 로드맵 =
+[[TracGuideToc]]
+
+로드맵은 프로젝트 개발을 계획하고 관리할 수 있는 [wiki:TracTickets 티켓 시스템]을 볼 수 있게 해줍니다.
+
+== 로드맵 창 ==
+
+기본적으로 로드맵은 단지 미래의 마일스톤의 리스트입니다. 마일스톤에 상세한 설명([wiki:WikiFormatting]을 사용해서)을 추가할 수 있습니다. 예를 들면 해당 마일스톤에 대한 주요한 목적같은 것을 말입니다. 추가적으로, 마일스톤에 해당하는 티켓이 모여있으며, 활성화된 티켓과 해결된 티켓들 사이의 비율이 마일스톤의 진행바에 표시되어집니다.
+
+== 마일스톤 창 ==
+
+개별적인 마일스톤 페이지를 볼 때, 간단한 통계정보를 선택할 수 있습니다.
+기본적으로, 콤포넌트별로 그룹지어진 활성/해결된 비율이 표시되어 집니다.
+또한 다른 기준, 예를 들면 티켓의 소유주나 심각성에 따라 다시 그룹지을 수 있습니다. 티켓 번호들은 적당한 티켓에 대한 [wiki:TracQuery 맞춤형 쿼리]에 링크되어집니다.
+
+== 로드맵 관리 ==
+
+[wiki:TracAdmin] 혹은 웹 인터페이스를 사용해서 마일스톤의 추가, 수정 그리고 제거가 가능합니다.
+
+'''Note:''' Milestone descriptions can currently only be edited from the web interface. With appropriate permissions, you'll see buttons for milestone management on the roadmap and milestone pages.
+
+== iCalendar 지원 ==
+
+The Roadmap supports the [http://www.ietf.org/rfc/rfc2445.txt iCalendar] format to keep track of planned milestones and related tickets from your favorite calendar software. Calendar applications supporting the iCalendar specification include [http://www.apple.com/ical/ Apple iCal] for Mac OS X and the cross-platform [http://www.mozilla.org/projects/calendar/ Mozilla Calendar]. [http://kdepim.kde.org/components/korganizer.php Korganizer] (the calendar application of the [http://www.kde.org/ KDE] project) and [http://www.novell.com/de-de/products/desktop/features/evolution.html Evolution] also support iCalendar.
+
+To subscribe to the roadmap, copy the iCalendar link from the roadmap (found at the bottom of the page) and choose the "Subscribe to remote calendar" action (or similar) of your calendar application, and insert the URL just copied.
+
+'''Note:''' For tickets to be included in the calendar as tasks, you need to be logged in when copying the link. You will only see tickets assigned to yourself, and associated with a milestone.
+
+More information about iCalendar can be found at [http://en.wikipedia.org/wiki/ICalendar Wikipedia].
+----
+참고 : TracTickets, TracReports, TracQuery, TracGuide

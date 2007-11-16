@@ -1,0 +1,34 @@
+= 위키 내용에 HTML 사용하기 =
+
+Trac은 위키 내용에 HTML을 삽입하는 것을 지원합니다.
+Trac은 HTML [wiki:WikiProcessors WikiProcessor]를 사용해서 위키 내용에 HTML을 삽입할 수 있게 해줍니다.
+
+HTML 지원은 내장된 기능입니다. 그리고 추가적으로 패키지를 설치할 필요가 없습니다.
+
+== HTML 사용하기 ==
+텍스트 블럭이 HTML로 처리되어야함을 위키 엔진에게 알리기 위해서는 ''html'' 처리기를 사용하십시오.
+
+이 예제는 그 방법을 설명합니다.:
+{{{
+#!html
+<pre class="wiki">{{{
+#!html
+&lt;h1 style="text-align: right; color: blue"&gt;HTML Test&lt;/h1&gt;
+}}}</pre>
+}}}
+
+결과는 다음과 같습니다.:
+{{{
+#!html
+<h1 style="text-align: right; color: blue">HTML Test</h1>
+}}}
+
+Note that Trac sanitizes your HTML code before displaying it. That means that if you try to use potentially dangerous constructs such as Javascript event handlers, those will be removed from the output.
+
+== 더 많은 정보 ==
+
+ * http://www.w3.org/ -- World Wide Web Consortium
+ * http://www.w3.org/MarkUp/ -- HTML Markup Home Page
+
+----
+참고:  WikiProcessors, WikiFormatting, WikiRestructuredText

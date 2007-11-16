@@ -1,0 +1,208 @@
+= Trac 리포트 =
+[[TracGuideToc]]
+
+Trac 리포트 모듈은 Trac 데이타베이스에서 티켓에 대한 정보를 제공하기 위해서 간단하지만 강력한 리포팅 기능을 제공합니다.
+
+Trac 자체의 리포트 정의 포맷이 있다기 보다는, [wiki:TracReposrts]는 리포트의 정의를 위해서 표준 SQL `SELECT` 구문에 의존합니다.
+
+  '''Note:''' ''The report module is being phased out in its current form because it seriously limits the ability of the Trac team to make adjustments to the underlying database schema. We believe that the [wiki:TracQuery query module] is a good replacement that provides more flexibility and better usability. While there are certain reports that cannot yet be handled by the query module, we intend to further enhance it so that at some point the reports module can be completely removed. This also means that there will be no major enhancements to the report module anymore.''
+
+  ''You can already completely replace the reports module by the query module simply by disabling the former in [wiki:TracIni trac.ini]:''
+  {{{
+  [components]
+  trac.ticket.report.* = disabled
+  }}}
+  ''This will make the query module the default handler for the “View Tickets” navigation item. We encourage you to try this configuration and report back what kind of features of reports you are missing, if any.''
+
+A report consists of these basic parts:
+ * '''ID''' -- Unique (sequential) identifier 
+ * '''Title'''  -- Descriptive title
+ * '''Description'''  -- A brief description of the report, in WikiFormatting text.
+ * '''Report Body''' -- List of results from report query, formatted according to the methods described below.
+ * '''Footer''' -- Links to alternative download formats for this report.
+
+== 정렬순서 변경하기 ==
+간단한 리포트(특정 그룹으로 묶이지 않은 리포트)는 특정 열의 제목을 클릭해서 그 열을 기준으로 정렬할 수 있습니다.
+
+만약 열의 제목이 하이퍼링크(빨강색)라면, 정렬할기를 원하는 열을 클릭하십시오. 같은 열의 제목을 다시 클릭하면 역순으로 정렬될 것입니다.
+
+
+== Alternative Download Formats ==
+Aside from the default HTML view, reports can also be exported in a number of alternative formats.
+At the bottom of the report page, you will find a list of available data formats. Click the desired link to 
+download the alternative report format.
+
+=== Comma-delimited - CSV (콤마로 나누어진 값) ===
+텍스트 형태로 리포트를 다운로드합니다. 각각의 행은 한줄에 표시되고, 하나의 콤마(',')로 각 열은 나누어져 있습니다.
+'''주의:''' 캐리지 리턴(CR), 라인피드(LF) 그리고 콤마(',')는 CSV 구조를 유지하기 위해서 열의 데이타로부터 제거됩니다.
+
+=== Tab-delimited ===
+위와 같습니다. 하지만 콤마(',')대신에 탭(\t)을 사용합니다.
+
+=== RSS - XML Content Syndication ===
+모든 리포트는 XML/RSS 2.0을 사용하는 syndication을 지원합니다. RSS feed를 허용하기 위해서는, 리포트 페이지의 아래에 있는 오렌지색의 `XML` 아이콘을 클릭하십시오. Trac에서의 RSS 지원에 대해서 일반적인 정보가 필요하다면 [wiki:TracRss] 페이지를 참고하십시오.
+
+----
+
+== 개별적인 리포트 만들기 ==
+''개별적인 리포트를 만들기 위해서는 SQL에 대한 어느정도의 지식을 가져야만 합니다.''
+
+리포트는 기본적으로 Trac에 의해서 실행되고 제공되는 하나의 이름을 가진 SQL 쿼리입니다. 리포트는 웹 인터페이스를 통해서 SQL 구문형태로 바로 보면서 만들 수 있습니다.
+
+일반적으로, 리포트는 'ticket' 테이블에 대한 열과 정렬방식을 사용하는 SELECT 구문으로 구성되어 있습니다.
+
+== 티켓의 열들 ==
+''ticket'' 테이블은 다음의 열을 가집니다.:
+ * id
+ * time
+ * changetime
+ * component
+ * severity  
+ * priority 
+ * owner
+ * reporter
+ * cc
+ * version
+ * milestone
+ * status
+ * resolution
+ * summary
+ * description
+
+각 열의 필드에 대한 상세한 설명에 대해서는 [wiki:TracTickets] 페이지를 참고하십시오.
+
+'''우선순위와 시간순으로 정렬된 모든 활성화된 티켓들'''
+
+'''예제:''' ''우선순위와 시간순으로 정렬된 모든 활성화된 티켓들''
+{{{
+SELECT id AS ticket, status, severity, priority, owner, 
+       time as created, summary FROM ticket 
+  WHERE status IN ('new', 'assigned', 'reopened')
+  ORDER BY priority, time
+}}}
+
+
+----
+
+
+== 진보된 리포트들: 동적 변수들 ==
+더 유연한 리포트를 위해서, Trac은 리포트의 SQL 구문안에 ''동적 변수들''의 사용을 지원합니다.
+간단히 말하면, 동적 변수는 쿼리가 실행되기전에 개별적인 데이타에 의해서 교체되는 ''특별한'' 스트링을 의미합니다.
+
+=== 쿼리에서 변수 사용하기 ===
+동적 변수를 위한 구문은 간단합니다. '$'로 시작하는 대문자로 된 스트링은 변수로 취급되어집니다.
+
+예제:
+{{{
+SELECT id AS ticket,summary FROM ticket WHERE priority='$PRIORITY'
+}}}
+
+리포트를 볼 때, $PRIORITY에 값을 할당하기 위해서는, 리포트 URL의 아규먼트로 앞에 있는 '$' 제거하고 그 값을 정의해야만 합니다.
+
+예제:
+{{{
+ http://projects.edgewall.com/trac/reports/14?PRIORITY=high
+}}}
+
+여러개의 변수를 사용하기 위해서는, '&'로 각 변수를 분리하십시오.
+
+예제:
+{{{
+ http://projects.edgewall.com/trac/reports/14?PRIORITY=high&SEVERITY=critical
+}}}
+
+
+=== 특별한 상수 변수 ===
+실제 리포트에서 사용하는 ''magic'' 동적 변수 하나가 존재합니다. 그 값은 URL을 변경하지 않고도 자동으로 설정되어집니다.
+
+ * $USER -- 로그인한 사용자의 이름.
+
+예제 (''나에게 할당된 모든 티켓들''):
+{{{
+SELECT id AS ticket,summary FROM ticket WHERE owner='$USER'
+}}}
+
+
+----
+
+
+== 진보된 리포트들 : 개별적인 포맷팅 ==
+Trac은 결과를 그룹핑하거나, 사용자가 정의한 CSS 스타일을 적용하는 개별적인 레이아웃을 포함하는 더 진보된 리포트를 지원합니다.
+이러한 리포트를 만들기 위해서, Trac 리포트 엔진의 결과물을 제어하기 위해서 특별한 SQL 구문을 사용할 것입니다.
+
+== 특별한 열 ==
+리포트 결과물를 꾸미기 위해서, [wiki:TracReports]는 퀴리의 결과에서 'magic'라고 이름붙은 열을 찾습니다.
+이 'magic'이라는 이름은 [wiki:TracReports]에 의해서 처리되고, 최종 리포트 레이아웃과 스타일에 영향을 줍니다.
+
+=== 자동적으로 포맷팅되어지는 열들 ===
+ * '''ticket''' -- 티켓 ID 번호. 티켓에 대한 하이퍼링크가 됩니다.
+ * '''created, modified, date, time''' -- 날짜와 시간으로 포맷팅됩니다.
+
+ * '''description''' -- wiki 엔진을 통해서 처리되는 티켓에 대한 설명 필드.
+
+'''예제:'''
+{{{
+SELECT id as ticket, created, status, summary FROM ticket 
+}}}
+
+=== 개별적으로 포맷팅되는 열들 ===
+Columns whose names begin and end with 2 underscores (Example: '''`__color__`''') are
+assumed to be ''formatting hints'', affecting the appearance of the row.
+ 
+ * '''`__group__`''' -- Group results based on values in this column. Each group will have its own header and table.
+ * '''`__color__`''' -- Should be a numeric value ranging from 1 to 5 to select a pre-defined row color. Typically used to color rows by issue priority.
+ * '''`__style__`''' -- A custom CSS style expression to use for the current row. 
+
+'''예제:''' ''모든 활성화된 티넷을 마일스톤별로 그룹지어서, 우선순위별로 색깔을 지정해서 출력''
+{{{
+SELECT p.value AS __color__,
+     t.milestone AS __group__,
+     (CASE owner WHEN 'daniel' THEN 'font-weight: bold; background: red;' ELSE '' END) AS __style__,
+       t.id AS ticket, summary
+  FROM ticket t,enum p
+  WHERE t.status IN ('new', 'assigned', 'reopened') 
+    AND p.name=t.priority AND p.type='priority'
+  ORDER BY t.milestone, p.value, t.severity, t.time
+}}}
+
+'''주의:''' A table join is used to match ''ticket'' priorities with their
+numeric representation from the ''enum'' table.
+
+=== Changing layout of report rows ===
+By default, all columns on each row are display on a single row in the HTML
+report, possibly formatted according to the descriptions above. However, it's
+also possible to create multi-line report entries.
+
+ * '''`column_`''' -- ''Break row after this''. By appending an underscore ('_') to the column name, the remaining columns will be be continued on a second line.
+
+ * '''`_column_`''' -- ''Full row''. By adding an underscore ('_') both at the beginning and the end of a column name, the data will be shown on a separate row.
+
+ * '''`_column`'''  --  ''Hide data''. Prepending an underscore ('_') to a column name instructs Trac to hide the contents from the HTML output. This is useful for information to be visible only if downloaded in other formats (like CSV or RSS/XML).
+
+'''Example:''' ''List active tickets, grouped by milestone, colored by priority, with  description and multi-line layout''
+
+{{{
+SELECT p.value AS __color__,
+       t.milestone AS __group__,
+       (CASE owner 
+          WHEN 'daniel' THEN 'font-weight: bold; background: red;' 
+          ELSE '' END) AS __style__,
+       t.id AS ticket, summary AS summary_,             -- ## Break line here
+       component,version, severity, milestone, status, owner,
+       time AS created, changetime AS modified,         -- ## Dates are formatted
+       description AS _description_,                    -- ## Uses a full row
+       changetime AS _changetime, reporter AS _reporter -- ## Hidden from HTML output
+  FROM ticket t,enum p
+  WHERE t.status IN ('new', 'assigned', 'reopened') 
+    AND p.name=t.priority AND p.type='priority'
+  ORDER BY t.milestone, p.value, t.severity, t.time
+}}}
+
+=== Reporting on custom fields ===
+
+If you have added custom fields to your tickets (experimental feature in v0.8, see TracTicketsCustomFields), you can write a SQL query to cover them. You'll need to make a join on the ticket_custom table, but this isn't especially easy.
+
+If you have tickets in the database ''before'' you declare the extra fields in trac.ini, there will be no associated data in the ticket_custom table. To get around this, use SQL's "LEFT OUTER JOIN" clauses. See TracIniReportCustomFieldSample for some examples.
+
+----
+참고 : TracTickets, TracQuery, TracGuide

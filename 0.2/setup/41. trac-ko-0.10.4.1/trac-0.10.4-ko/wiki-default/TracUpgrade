@@ -1,0 +1,137 @@
+= 업그레이드 명령 =
+[[TracGuideToc]]
+
+Trac 저장소는 때때로 새로운 버전의 Trac에서 사용되기 전에 업그레이드 되어야 할 때가 있습니다. 이 문서는 저장소를 업그레이드하기 위해 필요한 단계를 설명하고 있습니다.
+
+ '''주의''': ''저장소의 업그레이드는 특별히 언급되지 않으면 마이너 버전의 릴리즈에서는 필요하지 않습니다. 0.8.0 버전에서 만들어진(혹은 업그레이드된) Trac 저장소는 0.8.4(혹은 0.8.x 버전) 버전을 설치할 때는 업그레이드할 필요가 없습니다.''
+
+== 일반적인 명령 ==
+
+일반적으로, 새로운 Trac 버전을 설치하는 것을 포함해서 4 단계로 이루어져있습니다.
+
+=== Trac 코드 업그레이드하기 ===
+
+Trac의 정식 릴리즈 버전을 다운받거나, [http://projects.edgewall.com/trac/wiki/SubversionRepository Subversion 저장소]로 부터 Trac을 체크아웃하십시오.
+
+If you're doing a major version upgrade (such as from 0.8 to 0.9), it is ''highly'' recommended that you first remove the existing Trac code. To do this, you need to delete the `trac` directory from the Python `lib/site-packages` directory. You may also want to remove the Trac `cgi-bin`, `htdocs`, `templates` and `wiki-default` directories that are commonly found in a directory called `share/trac` (the exact location depends on your platform).
+
+만약 소스코드 배포버전을 가지고 있다면, 다음 명령을 수행하십시오.:
+{{{
+python setup.py install
+}}}
+
+새로운 버전을 설치하기 위해서, 윈도우용의 설치파일을 다운받았다면, 설치파일을 실행하십시오.
+
+=== Trac 저장소 업그레이드하기 ===
+
+특별한 언급이 없다면, 메이저 버전(0.8 혹은 0.9 같은) 사이의 업그레이드는 데이타베이스 스키마의 변경과 [wiki:TracEnvironment Trac 저장소] 디렉토리의 레이아웃의 변경을 포함합니다. 운이 좋게도, Trac은 쉽게 업그레이드할 수 있는 자동화된 업그레이드 스크립트를 제공합니다. 이 스크립트는 [wiki:TracAdmin trac-admin] 툴을 통해서 동작합니다.:
+{{{
+trac-admin /path/to/projenv upgrade
+}}}
+
+This command will do nothing if the environment is already up-to-date.
+
+Note that if you are using a PostgreSQL database, this command will fail with the message that the environment can only be backed up when you use an SQLite database. This means that you will have to backup the repository and the database manually. Then, to perform the actual upgrade, run:
+{{{
+trac-admin /path/to/projenv upgrade --no-backup
+}}}
+
+=== Trac 문서들 업그레이드하기 ===
+
+모든 [wiki:TracEnvironment Trac 저장소]는 설치된 Trac 버전에 대한 Trac 문서의 복사본을 포함하고 있습니다. 설치된 Trac 버전의 문서와 Trac 저장소에 포함된 문서를 일치시키기를 원할 때가 있습니다. [wiki:TracAdmin trac-admin] 툴은 문서를 업그레이드하기 위한 명령어를 제공합니다.
+{{{
+trac-admin /path/to/projenv wiki upgrade
+}}}
+
+물론 위 명령은 기존에 있던 `WikiStart` 페이지를 그대로 남겨둘 것입니다.
+
+=== 웹서버 재시작하기 ===
+
+In order to reload the new Trac code you will need to restart your web server (note this is not necessary for [wiki:TracCgi CGI]).
+
+
+== 특정 버전 ==
+
+다음의 섹션은 Trac의 특정 버전에서 업그레이드한 후 설정해야할 동작들에 대해서 설명하고 있습니다.
+
+== From 0.9.x to 0.10.x ==
+
+Due to some changes in the Wiki syntax, you may notice that certain parts of your pages no longer work as expected:
+ * Previously, links to images would result in that image being embedded into the page. Since 0.10, links to images remain plain links. If you want to embed an image in the page, use the `[[Image]]` macro.
+ * You can no longer use `%20` in wiki links to encode spaces. Instead, you should quote the name containing spaces (for example, use `wiki:"My page"` instead of `wiki:My%20page`.)
+
+Several enhancements have been made to the version control subsystem, in particular for the support of scoped repositories has been improved. 
+It is recommended that you perform a [TracAdmin#InteractiveMode trac-admin] '''`resync`''' operation to take advantage of these improvements.
+
+Also note that the argument list of the [TracAdmin trac-admin] '''`initenv`''' command has changed: there's a new argument for determining the type of version control system. The old usage was:
+{{{
+   initenv <projectname> <db> <repospath> <templatepath>
+}}}
+The new usage is:
+{{{
+   initenv <projectname> <db> <repostype> <repospath> <templatepath>
+}}}
+If you're using any scripts that automate the creation of Trac environments, you will need to update them. If you're using Subversion, specify `svn` for the `<repostype>` argument.
+
+== From 0.9.3 to 0.9.4 ==
+
+There is a bug in Pysqlite 1.x that causes reports using the "%" character for `LIKE` clauses or date formatting to fail.  You will need to use escape the percent characters with another: "%%".
+
+== From 0.9.x to 0.9.3 or later ==
+
+If you are using plugins you might need to upgrade them. See http://projects.edgewall.com/trac/milestone/0.9.3 for further details.
+
+== From 0.9-beta to 0.9 ==
+
+If inclusion of the static resources (style sheets, javascript, images) is not working, check the value of the `htdocs_location` in trac.ini. For [wiki:TracModPython mod_python], [wiki:TracStandalone Tracd] and [wiki:TracFastCgi FastCGI], you can simply remove the option altogether. For [wiki:TracCgi CGI], you should fix it to point to the URL you mapped the Trac `htdocs` directory to (although you can also remove it and then [wiki:TracCgi#MappingStaticResources map the static resources]). If you're still having problems after removing the option, check the paths in the `trac/siteconfig.py` file and fix them if they're incorrect.
+
+If you've been using plugins with a beta release of Trac 0.9, or have disabled some of the built-in components, you might have to update the rules for disabling/enabling components in [wiki:TracIni trac.ini]. In particular, globally installed plugins now need to be enabled explicitly. See TracPlugins and TracIni for more information.
+
+If you want to enable the display of all ticket changes in the timeline (the “Ticket Details” option), you now have to explicitly enable that in [wiki:TracIni trac.ini], too:
+
+{{{
+[timeline]
+ticket_show_details = true
+}}}
+
+== 0.8.x에서 0.9로 업그레이드 ==
+
+만약 [wiki:TracCgi CGI]를 사용하고 있다면, Trac htdocs 정적 자원에 대한 `Alias`를 갱신하기를 원할 것입니다. 어떻게 설정하는지에 대한 예제는 [wiki:TracCgi#MappingStaticResources mapping static resources] 페이지를 참고하십시오.
+
+[wiki:TracFastCgi FastCGI]와 [wiki:TracModPython mod_python] 사용자들은 이 설정이 기본적으로 더 이상 사용되지 않기 때문에 안전하게 Trac htdocs 디렉토리에 대한 `Alias` 설정을 제거할 수 있습니다.
+
+[wiki:TracModPython mod_python] 사용자들은 Apache HTTPD 설정에서 mod_python 핸들러의 이름을 변경할 필요가 있습니다.
+{{{
+   from: PythonHandler trac.ModPythonHandler
+   to:   PythonHandler trac.web.modpython_frontend
+}}}
+
+만약 [http://initd.org/tracker/pysqlite PySQLite] 2.x 버전을 설치했다면, Trac은 SQLite 3.x 파일 포맷을 사용해서 SQLite 데이타베이스를 열려고 할 것입니다.
+SQLite 2.8.x 버전과 SQLite 3.x 버전에서 사용되는 데이타베이스 포맷은 호환되지 않습니다. 만약 업그레이드 한 후에
+''“file is encrypted or is not a database”'' a 같은 에러가 발생한다면 데이타베이스 파일을 변환해야만 합니다.
+
+데이타베이스 파일을 변환하기 위해서는, SQLite 2.8.x와 SQLite 3.x 버전, 둘 다 설치되어 있어야 합니다(파일이름이 다르기 때문에 같은 시스템에 설치될 수 있습니다.). 다음 명령을 수행하십시오.:
+{{{
+ $ mv trac.db trac2.db
+ $ sqlite trac2.db .dump | sqlite3 trac.db
+}}}
+
+To update multiple database files at once on linux you may use the following command (replace {{{/var/trac}}} withe the location where your trac installtions reside):
+{{{
+ $ find /var/trac/ -iname "trac.db" | xargs -i bash -c "mv {} {}.2; sqlite {}.2 .dump | sqlite3 {};"
+}}}
+
+Remember the give the webserver write permission to trac.db.
+
+변환이 성공적으로 끝났는지를 테스트한 후에, `trac2.db` 파일은 삭제할 수 있습니다. SQLite의 업그레이드에 대한 더 많은 정보가 필요하다면, http://www.sqlite.org/version3.html 을 참고하십시오.
+
+== 0.7.x에서 0.8로 업그레이드 ==
+
+0.8 버전에서는 추가적인 권한을 필요로 하는 로드맵 기능이 추가되었습니다. 설치하는 경우에는 기본적으로 ROADMAP_VIEW와 MILESTONE_VIEW 권한이 anonymous 사용자에게 할당됩니다. 하지만 업그레이드하는 경우에는 이 권한들을 수동으로 허용해 주어야만 합니다.:
+{{{
+ $ trac-admin /path/to/projectenv permission add anonymous MILESTONE_VIEW
+ $ trac-admin /path/to/projectenv permission add anonymous ROADMAP_VIEW
+}}}
+
+-----
+참고 : TracGuide, TracInstall

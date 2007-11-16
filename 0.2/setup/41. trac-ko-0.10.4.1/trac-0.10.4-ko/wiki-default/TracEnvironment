@@ -1,0 +1,111 @@
+= Trac 환경변수 =
+
+Trac uses a directory structure and a database for storing project data. The directory is referred to as the Environment.
+
+== Trac 저장소 만들기 ==
+
+새로운 Trac 저장소는 [wiki:TracAdmin trac-admin] 명령어를 사용해서 만들어집니다.:
+{{{
+$ trac-admin /path/to/projectenv initenv
+}}}
+
+[wiki:TracAdmin trac-admin] will ask you for the name of the project, the
+database connection string (explained below), and the type and path to
+your source code repository.
+
+''Note: The web server user will require file system write permission to 
+the environment directory and all the files inside. Please remember to set
+the appropriate permissions. The same applies to the Subversion repository 
+Trac is eventually using, although Trac will only require read access as long 
+as you're not using the BDB file system.''
+
+== 데이타베이스 연결 스트링 ==
+
+Since version 0.9, Trac supports both [http://sqlite.org/ SQLite],
+[http://www.postgresql.org/ PostgreSQL] and [http://mysql.com/ MySQL] as
+database backends.  The default is to use SQLite, which is probably sufficient
+for most projects. The database file is then stored in the environment
+directory, and can easily be [wiki:TracBackup backed up] together with the
+rest of the environment.
+
+임베디드 SQLite 데이타베이스에 대한 연결 스트링은:
+{{{
+sqlite:db/trac.db
+}}}
+
+If you want to use PostgreSQL or MySQL instead, you'll have to use a
+different connection string. For example, to connect to a PostgreSQL
+database on the same machine called `trac`, that allows access to the
+user `johndoe` with the password `letmein`, use:
+{{{
+postgres://johndoe:letmein@localhost/trac
+}}}
+
+만약 PostgreSQL이 표준 포트(예를 들면 9342)가 아닌 포트에서 동작하고 있다면:
+{{{
+postgres://johndoe:letmein@localhost:9342/trac
+}}}
+
+`trac-admin initenv` 명령을 수행하기 전에 PostgreSQL를 사용해서 데이타베이스를 생성해야만 합니다.
+
+And make sure PostgreSQl DB name is "trac". What worked for me:
+And didn't work uppercase trac-user-name
+{{{
+sudo su - postgres -c createdb trac
+sudo su - postgres -c psql trac
+CREATE USER trac-user-name WITH PASSWORD 'trac-pass-name';
+}}}
+
+(Just to remind you, if you don't have a sudo/su setup, you just need to do the createdb and psql statements. That threw me the first couple of times I read this.)
+
+== Source Code Repository ==
+
+You'll first have to provide the ''type'' of your repository (e.g. `svn` for Subversion,
+which is the default), then the ''path'' where the repository is located.
+
+If you don't want to use Trac with a source code repository, simply leave the ''path'' empty
+(the ''type'' information doesn't matter, then).
+
+For some systems, it is possible to specify not only the path to the repository,
+but also a ''scope'' within the repository. Trac will then only show information
+related to the files and changesets below that scope. The Subversion backend for
+Trac supports this; for other types, check the corresponding plugin's documentation.
+
+Example of a configuration for a Subversion repository:
+{{{
+[trac]
+repository_type = svn
+repository_dir = /path/to/your/repository
+}}}
+
+The configuration for a scoped Subversion repository would be:
+{{{
+[trac]
+repository_type = svn
+repository_dir = /path/to/your/repository/scope/within/repos
+}}}
+
+== 디렉토리 구조 ==
+
+Trac 저장소 디렉토리는 일반적으로 다음의 파일과 디렉토리들로 구성되어 있습니다.:
+
+ * `README` - 저장소에 대한 상세한 설명.
+ * `VERSION` - 저장소의 버전 ID가 들어있는 파일.
+ * `attachments` - 위키와 티켓의 첨부파일이 여기에 저장됩니다.
+ * `conf`
+   * `trac.ini` - 메인 환경설정 파일. [wiki:TracIni] 페이지를 참고하십시오.
+ * `db`
+   * `trac.db` - SQLite 데이타베이스 (SQLite를 사용하고 있다면).
+ * `plugins` - 해당 Trac 저장소에 해당하는 [wiki:TracPlugins plugin]들 (Python eggs)
+ * `templates` - 해당 저장소에 해당하는 템플릿트.
+   * `site_css.cs` - 해당 저장소에 해당하는 CSS 규칙들.
+   * `site_footer.cs` - 해당 저장소에 해당하는 page footer.
+   * `site_header.cs` - 해당 저장소에 해당하는 page header.
+ * `wiki-macros` - 해당 저장소에 해당하는 [wiki:WikiMacros 위키 매크로들].
+
+  '''Note: don't confuse a Trac environment directory with the source code repository directory.
+It happens that the above structure is loosely modelled after the Subversion repository directory 
+structure, but they are not and ''must not'' be located at the same place.'''
+
+----
+참고 : TracAdmin, TracBackup, TracIni, TracGuide
