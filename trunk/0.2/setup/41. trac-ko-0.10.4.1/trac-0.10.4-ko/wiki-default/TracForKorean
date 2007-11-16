@@ -1,0 +1,104 @@
+= 한국어 환경을 위한 Trac 설정 =
+
+이 페이지는 [http://kldp.net/projects/trac-ko/ Trac 한글번역 프로젝트]에 의해서 작성되었습니다.
+
+이 페이지는 한국어 환경을 위한 Trac의 설정에 대한 페이지입니다.
+
+모든 테스트는 FedoraCore4에서 수행되었습니다.
+
+
+== 소스코드의 언어 설정하기 ==
+프로젝트의 소스파일이 UTF8이 아닌 eucKR(cp949)형식으로 되어 있을 때, Trac의 소스브라우저에서 소스 파일의 한글이 깨져 보이는 문제가 발생합니다.
+
+다음과 같이 [wiki:TracIni trac.ini] 파일의 default_charset 값을 설정해서 이 문제를 해결할 수 있습니다. (만약 Windows 환경에서 소스코드에 대한 작업을 한다면 아마 '''cp949'''로 설정해야할 것입니다.)
+
+{{{
+[trac]
+    default_charset = euc-kr
+}}}
+
+만약 [http://www.python.org python] 2.3 이하 버전을 사용한다면 [http://cjkpython.i18n.org/ cjk-codec] 패키지를 설치하셔야 합니다.
+
+Trac-0.9b1에서는 [http://www.python.org python] 2.3 이상의 버전을 필요로 합니다.
+
+[http://www.python.org python] 2.4에서는 [http://cjkpython.i18n.org/ cjk-codec]이 기본으로 포함되어 있으므로 [http://cjkpython.i18n.org/ cjk-codec]을 설치할 필요가 없습니다.
+
+참고 : [wiki:TracIni]
+
+
+== 날짜/시간 형식 변경하기 ==
+
+=== CGI를 사용하는 경우 ===
+
+Apache의 환경설정파일인 httpd.conf 파일에서 LC_TIME 환경변수를 설정해주면 Trac에서의 모든 날짜/시간 형식이 아래와 같이 변경됩니다.
+
+{{{
+<Location "/cgi-bin/trac.cgi">
+	SetEnv TRAC_ENV "/path/to/projectenv"
+	SetEnv LC_TIME "ko_KR.UTF-8"
+</Location>
+}}}
+
+만약 Windows에 Trac을 설치했다면 LC_TIME값을 다음과 같이 설정해야 합니다.
+{{{
+<Location "/cgi-bin/trac.cgi">
+	SetEnv TRAC_ENV "/path/to/projectenv"
+	SetEnv LC_TIME "English_KOREA"
+</Location>
+}}}
+
+변경하기전:
+{{{
+ 08/29/05:
+}}}
+
+
+LC_TIME 환경변수를 설정한 후:
+{{{
+ 2005년 08월 29일:
+}}}
+
+
+=== mod_python을 사용하는 경우 ===
+CGI 방식과 비교해서 굉장한 속도 향상을 가져올 수 있습니다.
+
+아래와 같이 ''!TracLocae'' 옵션을 ''ko_KR.utf8''로 설정해 주면 한글 형식의 날짜/시간 포맷을 보실 수 있습니다.
+{{{
+<Location /trac>
+	SetHandler mod_python
+	PythonHandler trac.web.modpython_frontend
+	PythonOption TracUriRoot /trac
+	PythonOption TracEnvParentDir "/var/trac"
+	PythonOption TracLocale "ko_KR.utf8"
+</Location>
+}}}
+
+만약 Windows에 Trac을 설치했다면 TracLocale값을 다음과 같이 설정해야 합니다.
+{{{
+PythonOption TracLocale "English_KOREA"
+}}}
+참고한 곳 : [http://niceview.egloos.com/1789563/]
+
+
+== Windows 환경에서 LC_TIME과 TracLocale를 English_KOREA로 설정하는 이유 ==
+만약 '''Korean_KOREA'''를 지정하게 되면 Trac에서 출력되는 날짜에서 ''오전/오후''문자가 깨어져서 출력되게 됩니다. 그리고 '''Korean_KOREA.UTF-8'''로 지정하게 되면 Trac에서 아래와 같은 에러가 발생하게 됩니다.
+
+{{{
+C:\Python24>python.exe
+Python 2.4.2 (#67, Sep 28 2005, 12:41:11) [MSC v.1310 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import locale
+>>> locale.setlocale(locale.LC_ALL, "Korean_KOREA")
+'Korean_Korea.949'
+>>> locale.setlocale(locale.LC_ALL, "Korean_KOREA.UTF8")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+  File "C:\Python24\lib\locale.py", line 381, in setlocale
+    return _setlocale(category, locale)
+locale.Error: unsupported locale setting
+}}}
+
+따라서 LC_TIME과 TracLocale값을 '''English_KOREA'''로 설정해서 Trac에서 출력되는 날짜 형식에서 ''오전/오후'' 대신에 ''AM/PM''을 사용해야합니다.
+
+----
+참고 : [wiki:TracInstall]

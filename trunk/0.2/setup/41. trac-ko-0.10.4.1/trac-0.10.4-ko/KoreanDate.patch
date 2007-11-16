@@ -1,0 +1,27 @@
+Index: trac/Timeline.py
+===================================================================
+--- trac/Timeline.py	(revision 390)
++++ trac/Timeline.py	(working copy)
+@@ -100,7 +100,7 @@
+         t = time.localtime()
+         if req.args.has_key('from'):
+             try:
+-                t = time.strptime(req.args.get('from'), '%x')
++                t = time.strptime(req.args.get('from'), u'%Y년 %m월 %d일')
+             except:
+                 pass
+ 
+Index: trac/util/datefmt.py
+===================================================================
+--- trac/util/datefmt.py	(revision 390)
++++ trac/util/datefmt.py	(working copy)
+@@ -103,7 +103,8 @@
+     seconds = None
+     text = text.strip()
+     for format in ['%x %X', '%x, %X', '%X %x', '%X, %x', '%x', '%c',
+-                   '%b %d, %Y']:
++                    '%b %d, %Y', u'%Y년 %m월 %d일',
++                    u'%Y년 %m월 %d일 %H시 %M분 %S초']:
+         try:
+             date = time.strptime(text, format)
+             seconds = time.mktime(date)

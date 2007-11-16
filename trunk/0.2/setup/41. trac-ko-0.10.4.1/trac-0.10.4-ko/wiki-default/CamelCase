@@ -1,0 +1,25 @@
+= !CamelCase =
+[wiki:CamelCase]란 대문자로 시작하는 단어들이 서로 연결되어져서 만들어진 새로운 단어를 의미합니다.
+
+[wiki:CamelCase]는 하이퍼링크를 생성할 때 사용되는 위키의 오랜 관행입니다.
+[wiki:CamelCase]에서는 대문자 뒤에 반드시 소문자가 와야만 한다는 추가적인 제약이 있습니다.
+따라서 "AlabamA" 와 "ABc" 는 하이퍼링크가 아닙니다.
+
+== Customizing the Wiki behavior ==
+
+Some people dislike linking by CamelCase.  While Trac remains faithful to the original Wiki style, it provides a number of ways to accomodate users with different preferences:
+ * There's an option (`ignore_missing_pages` in `[wiki]`) to simply ignore links to missing pages when the link is written using the CamelCase style, instead of that word being replaced by a gray link followed by a question mark.[[BR]]
+   That can be useful when CamelCase style is used to name code artifacts like class names and there's no corresponding page for them.
+ * There's an option (`split_page_names` in `[wiki]`) to automatically insert space characters between the words of a CamelCase link when rendering the link.
+ * Creation of explicit Wiki links is also easy, see WikiPageNames for details.
+ * In addition, Wiki formatting can be disabled completely in some places (e.g. when rendering commit log messages)
+
+See TracIni for more information on the available options.
+
+== CamelCase에 대한 더 많은 정보 ==
+
+ * http://c2.com/cgi/wiki?WikiCase
+ * http://en.wikipedia.org/wiki/CamelCase
+
+----
+참고 : WikiPageNames, WikiNewPage, WikiFormatting, TracWiki

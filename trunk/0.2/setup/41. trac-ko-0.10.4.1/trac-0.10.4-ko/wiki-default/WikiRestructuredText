@@ -1,0 +1,173 @@
+= Trac에서의 reStructuredText 지원 =
+
+Trac은 [wiki:WikiFormatting]이 사용되는 곳에서 또다른 위키 마크업 언어로써 ''reStructuredText'' (RST)를 사용하는 것을 지원합니다.
+
+reStucturedText 웹페이지로부터:
+ "''reStructuredText is an easy-to-read, what-you-see-is-what-you-get plaintext markup syntax and parser   system. It is useful for in-line program documentation (such as Python docstrings), for quickly creating  simple web pages, and for standalone documents. reStructuredText is designed for extensibility for  specific application domains. ''"
+
+=== 요구사항 ===
+Note that to activate RST support in Trac, the python docutils package must be installed. 
+If not already available on your operating system, you can download it at the [http://docutils.sourceforge.net/rst.html RST Website].
+
+=== RST에 대한 더 많은 정보 ===
+
+ * reStructuredText Website -- http://docutils.sourceforge.net/rst.html
+ * RST Quick Reference -- http://docutils.sourceforge.net/docs/rst/quickref.html
+
+----
+
+== Trac에서 RST 사용하기 ==
+To specify that a block of text should be parsed using RST, use the ''rst'' processor. 
+
+=== reStructuredText에서의 TracLinks ===
+
+ * Trac provides a custom RST reference-directive 'trac' to allow TracLinks from within RST text.
+
+ 예제:
+ {{{
+ {{{
+ #!rst
+ This is a reference to |a ticket|
+
+ .. |a ticket| trac:: #42
+ }}}
+ }}}
+
+ For a complete example of all uses of the ''trac''-directive, please see WikiRestructuredTextLinks. 
+
+
+ * Trac allows an even easier way of creating TracLinks in RST, using the custom '':trac:'' link naming scheme.
+
+ 예제:
+ {{{
+ {{{
+ #!rst
+ This is a reference to ticket `#12`:trac:
+
+ To learn how to use Trac, see `TracGuide`:trac:
+ }}}
+ }}}
+
+=== reStructuredText에서의 Syntax 하일라이팅 ===
+
+There is a directive for doing TracSyntaxColoring in ReST as well. The directive is called
+code-block
+
+예제
+
+{{{
+{{{
+#!rst
+
+.. code-block:: python
+
+ class Test:
+
+    def TestFunction(self):
+        pass
+
+}}}
+}}}
+
+아래와 같은 결과를 출력할 것입니다.
+
+{{{
+#!rst
+
+.. code-block:: python
+
+ class Test:
+
+    def TestFunction(self):
+        pass
+
+}}}
+
+=== reStructuredText에서의 WikiMacros ===
+
+For doing WikiMacros in ReST you use the same directive as for syntax highlightning i.e
+code-block. To work you must use a version of trac that has #801 applied. 
+
+=== WikiMacro 예제 ===
+
+{{{
+{{{
+#!rst
+
+.. code-block:: HelloWorld
+ 
+   Something I wanted to say
+
+
+}}}
+}}}
+
+아래와 같은 결과를 출력할 것입니다.
+
+[[HelloWorld(Something I wanted to say)]]
+
+
+=== Bigger ReST Example ===
+The example below should be mostly self-explanatory:
+{{{
+#!html
+<pre class="wiki">{{{
+#!rst
+FooBar Header
+=============
+reStructuredText is **nice**. It has its own webpage_.
+
+A table:
+
+=====  =====  ======
+   Inputs     Output
+------------  ------
+  A      B    A or B
+=====  =====  ======
+False  False  False
+True   False  True
+False  True   True
+True   True   True
+=====  =====  ======
+
+RST TracLinks
+-------------
+
+See also ticket `#42`:trac:.
+
+.. _webpage: http://docutils.sourceforge.net/rst.html
+}}}</pre>
+}}}
+
+
+결과화면:
+{{{
+#!rst
+FooBar Header
+=============
+reStructuredText is **nice**. It has its own webpage_.
+
+A table:
+
+=====  =====  ======
+   Inputs     Output
+------------  ------
+  A      B    A or B
+=====  =====  ======
+False  False  False
+True   False  True
+False  True   True
+True   True   True
+=====  =====  ======
+
+RST TracLinks
+-------------
+
+See also ticket `#42`:trac:.
+
+.. _webpage: http://docutils.sourceforge.net/rst.html
+}}}
+
+
+----
+참고 : WikiRestructuredTextLinks, WikiProcessors, WikiFormatting

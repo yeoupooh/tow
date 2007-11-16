@@ -1,0 +1,43 @@
+= Trac-ko 0.10.4 버전을 사용하게 되신 것을 환영합니다. =
+
+Trac은 '''웹기반'''으로 '''소프트웨어 프로젝트'''를 관리하는 '''최소한'''의 접근방법입니다.
+Trac의 목표는 소프트웨어의 문제점, 개선책 그리고 전체 진행과정을 효과적으로 추적하고 다루는 간단한 방법을 제공하는 것입니다.
+
+Trac의 모든 부분은 기존에 팀에서 사용되던 절차와 문화에서 최대한 벗어나지 않으면서 '''개발자가 좋은 소프트웨어를 작성하도록 돕는다는''' 하나의 목표를 가지고 디자인 되었습니다.
+
+다른 모든 위키 페이지들처럼, 이 페이지도 편집할 수 있습니다. 이 말은 웹 브라우저를 사용해서 간단하게 이 페이지의 내용을 변경할 수 있음을 의미합니다.
+간단히 페이지 아랫쪽의 "이 페이지 편집하기" 버튼을 클릭하면 됩니다.
+WikiFormatting 페이지에서 사용할 수 있는 위키 포맷팅 명령들에 대한 상세한 설명을 볼 수 있습니다.
+
+"[wiki:TracAdmin trac-admin] ''yourenvdir'' initenv" 명령은 디폴트 위키 페이지들과 샘플데이터들을 포함하는 새로운 [wiki:TracEnvironment Trac 저장소]를 생성합니다.
+이렇게 해서 새롭게 생성된 [wiki:TracEnvironment Trac 저장소]는 프로젝트와 함께 Trac을 시작할 수 있도록 돕는 [wiki:TracGuide TracGuide]문서를 포함하고 있습니다.
+
+프로젝트에 [http://trac.edgewall.org/ Trac]을 좀 더 최적화하기 위해서 [wiki:TracAdmin trac-admin] 문서를 참조하십시오. 특히 ''components'', ''versions'' 그리고 ''마일스톤''에 대한 내용을 참조하십시오..
+
+Trac을 시작하기 위해서는 TracGuide 페이지를 보십시오.
+
+Enjoy! [[BR]]
+''The Trac Team''
+
+== Trac 시작하기 ==
+
+ * TracGuide --  Trac에 대한 문서들
+ * [http://trac.edgewall.org/ Trac 프로젝트] -- Trac 오픈 소스 프로젝트
+ * [http://trac.edgewall.org/wiki/TracFaq Trac FAQ] -- 자주 질문되는 내용들
+ * TracSupport --  Trac 프로젝트 지원하기
+
+모든 위키 페이지의 리스트가 필요하다면 [wiki:TitleIndex 제목 색인] 페이지를 보십시오.
+
+== Trac-ko 프로젝트 ==
+[http://kldp.net/projects/trac-ko Trac-ko 프로젝트]는 Trac의 메시지들을 한글로 번역하기 위해 시작된 프로젝트입니다.
+
+Trac-ko 프로젝트의 릴리즈파일들은 Trac 프로젝트의 같은 버전의 릴리즈 파일들과는 다릅니다.
+Trac-ko 프로젝트의 릴리즈파일은 Trac 프로젝트의 릴리즈 시기의 trunk(개발버전)에 있는 버전이 릴리즈됩니다.
+
+예를 들면 ''Trac-0.9.5'' 버전이 릴리즈되었다면 ''Trac-0.9.5-ko'' 버전은 ''Trac-0.9.5'' 버전이 릴리즈될 때의
+trunk에 있는 개발버전이 ''Trac-0.9.5-ko'' 버전으로 릴리즈됩니다.
+
+'''주의''' : 이 점을 주의하시고, Trac-ko 버전을 설치하시기 바랍니다.
+
+== 한국어 환경을 위한 Trac ==
+ * [wiki:TracForKorean 한국어 환경을 위한 Trac]

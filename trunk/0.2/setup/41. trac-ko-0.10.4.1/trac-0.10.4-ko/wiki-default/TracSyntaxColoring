@@ -1,0 +1,81 @@
+= 소스 코드의 Syntax Coloring =
+Trac supports language-specific syntax highlighting of source code in [wiki:WikiFormatting wiki formatted] text and the [wiki:TracBrowser repository browser].
+
+Syntax highlighting을 지원하기 위해서, Trac은 많은 수의 프로그램 언어를 지원하는 외부 라이브러리를 사용합니다.
+
+현재 Trac은 다음 패키지들 중 하나 이상을 사용해서 syntax coloring을 지원합니다.
+
+ * [http://www.codento.com/people/mtr/genscript/ GNU Enscript] 
+ * [http://silvercity.sourceforge.net/ SilverCity]
+
+To activate syntax coloring, simply install either one (or more) of these packages. No additional configuration is required, however to modify the colors, have a look at `trac/htdocs/css/code.css`.
+
+이 패키지들을 사용할 때, Trac은 자동적으로 Enscript보다 SilverCity를 사용하려고 시도할 것입니다. (아래의 주의를 보십시오.)
+
+두개의 패키지가 모두 없다면, Trac은 데이타를 plain text로 출력할 것입니다.
+
+'''주의:''' Enscript는 많은 수의 언어를 지원합니다. 하지만 SilverCity는 라이브러리이고 외부 프로세스에서 실행되지 않기 때문에 일반적으로 더 빠릅니다.
+
+=== SilverCity에 대해서 ===
+SilverCity는 [http://www.scintilla.org/ Scintilla]에 있는 lexer를 사용합니다.
+Scintilla는 SilverCity에서 구현된 언어보다 더 많은 언어를 지원합니다.
+만약 Scintilla에 의해 지원되는 언어를 SilverCity에 추가하기를 원한다면, 별로 어럽지 않게 추가할 수 있습니다.
+더 많은 정보가 필요하다면 [http://projects.edgewall.com/trac/wiki/SilverCityAddLanguage SilverCityAddLanguage] 페이지를 참고하십시오.
+
+
+== Syntax Coloring 지원 ==
+
+|| || !SilverCity || Enscript ||
+|| Ada      ||   || X ||
+|| Asm      ||   || X ||
+|| * ASP    || X || X ||
+|| * C      || X || X ||
+|| * C#     ||   || X(2) ||
+|| * C++    || X || X ||
+|| * Java   ||   || X ||
+|| Awk      ||   || X ||
+|| CSS      || X ||   ||
+|| Diff     ||   || X ||
+|| Eiffel   ||   || X ||
+|| Elisp    ||   || X ||
+|| Fortran  ||   || X ||
+|| Haskell  ||   || X ||
+|| HTML     || X || X ||
+|| IDL      ||   || X ||
+|| Javascript || X || X ||
+|| m4       ||   || X ||
+|| Makefile ||   || X ||
+|| Matlab   ||   || X ||
+|| Objective-C|| || X ||
+|| Pascal   ||   || X ||
+|| * Perl   || X || X ||
+|| * PHP    || X || X ||
+|| PSP      || X ||   ||
+|| Pyrex    ||   || X ||
+|| * Python || X || X ||
+|| * Ruby   || X || X (1) ||
+|| Scheme   ||   || X ||
+|| Shell    ||   || X ||
+|| SQL      || X || X ||
+|| Troff    ||   || X ||
+|| TCL      ||   || X ||
+|| Tex      ||   || X ||
+|| Verilog  ||   || X ||
+|| VHDL     ||   || X ||
+|| Visual Basic |||| X ||
+|| VRML     ||   || X ||
+|| XML      || X ||  ||
+
+''(*) [wiki:WikiProcessors]를 사용해서 [wiki:WikiFormatting 위키 텍스트]내에서 인라인 코드블럭으로 사용되어 질 수 있습니다.''
+
+''(1) Ruby 언어에 대한 syntax highlighting 기능은 Enscript 배포판에는 포함되어 있지 않습니다. Ruby 언어에 대한 Highlighting 기능은 [http://neugierig.org/software/ruby/]에서 얻을 수 있습니다.
+
+''(2) C# highlighting is not included in the Enscript distribution.  Highlighting rules for C# can be obtained from: http://wiki.hasno.info/index.php/Csharp.st
+
+== 기타 소프트웨어 ==
+ * GNU Enscript -- http://directory.fsf.org/GNU/enscript.html
+ * GNU Enscript for Windows -- http://gnuwin32.sourceforge.net/packages/enscript.htm
+ * !SilverCity -- http://silvercity.sf.net/
+
+----
+참고 : WikiProcessors, WikiFormatting, TracWiki, TracBrowser

@@ -1,0 +1,171 @@
+= Trac과 mod_python =
+[[TracGuideToc]]
+
+Trac supports [http://www.modpython.org/ mod_python], which speeds up Trac's response times considerably, especially compared to [TracCgi CGI], and permits use of many Apache features not possible with [wiki:TracStandalone tracd]/mod_proxy.
+
+== 간단한 설정 ==
+
+mod_python을 설치했다면, Apach 설정에서 모듈을 로드하기 위해서 다음 라인을 추가해야할지도 모릅니다.:
+{{{
+LoadModule python_module modules/mod_python.so
+}}}
+
+ ''Note: The exact path to the module depends on how the HTTPD installation is laid out.''
+
+You can test your mod_python installation by adding the following to your httpd.conf.  You should remove this when you are done testing for security reasons.
+{{{
+<Location /mpinfo>
+   SetHandler mod_python
+   PythonHandler mod_python.testhandler
+</Location>
+}}}
+
+mod_python을 사용하기 위한 Trac의 간단한 설정은 다음과 같습니다.:
+{{{
+<Location /projects/myproject>
+   SetHandler mod_python
+   PythonHandler trac.web.modpython_frontend 
+   PythonOption TracEnv /var/trac/myproject
+   PythonOption TracUriRoot /projects/myproject
+</Location>
+}}}
+
+The option '''`TracUriRoot`''' may or may not be necessary in your setup. Try your configuration with out it, and if the URLs produced by Trac look wrong or if Trac does not seem to recognize the URLs correctly, add the '''`TracUriRoot`''' option.  You will notice that the `Location` and '''`TracUriRoot`''' have the same path.
+
+=== Configuring Authentication ===
+
+Configuring authentication works just like for [wiki:TracCgi#AddingAuthentication CGI]:
+{{{
+<Location "/projects/myproject/login">
+  AuthType Basic
+  AuthName "myproject"
+  AuthUserFile /var/trac/myproject/.htpasswd
+  Require valid-user
+</Location>
+}}}
+
+=== Setting the !PythonPath ===
+
+만약 Trac이 Python 경로에 설치되지 않았다면, Apache에서 `PythonPath` 지시자를 사용해서 Trac의 mod_python 핸들러가 어디에 있는지를 설정해야합니다.:
+{{{
+<Location /projects/myproject>
+  ...
+  PythonPath "sys.path + ['/path/to/trac']"
+  ...
+</Location>
+}}}
+
+Be careful about using the !PythonPath directive, and ''not'' `SetEnv PYTHONPATH`, as the latter won't work.
+
+== 여러개의 프로젝트 설정하기 ==
+
+The Trac mod_python handler supports a configuration option similar to Subversion's `SvnParentPath`, called `TracEnvParentDir`:
+{{{
+<Location /projects>
+  SetHandler mod_python
+  PythonHandler trac.web.modpython_frontend 
+  PythonOption TracEnvParentDir /var/trac
+  PythonOption TracUriRoot /projects
+</Location>
+}}}
+
+When you request the `/projects` URL, you will get a listing of all subdirectories of the directory you set as `TracEnvParentDir` that look like Trac environment directories. Selecting any project in the list will bring you to the corresponding Trac environment.
+
+프로젝트 홈페이지에서 서브디렉토리의 리스트를 보기를 원하지 않는다면 다음과 같이 설정하삽시오.:
+{{{
+<LocationMatch "/.+/">
+}}}
+
+이렇게 설정하면 !DocumentRoot 디렉토리에 메인 페이지가 존재할 가능성이 있는 한은, 루트경로와는 다른 모든 경로에 대해서 mod_python을 사용하도록 할 것입니다.
+
+`<LocationMatch>` 지시자를 사용하면 모든 프로젝트에 대해서 같은 인증방식을 사용할 수 있습니다.:
+{{{
+<LocationMatch "/projects/[^/]+/login">
+  AuthType Basic
+  AuthName "Trac"
+  AuthUserFile /var/trac/.htpasswd
+  Require valid-user
+</LocationMatch>
+}}}
+
+== Virtual Host Configuration ==
+
+Below is the sample configuration required to set up your trac as a virtual server (i.e. when you access it at the URLs like
+!http://trac.mycompany.com):
+
+{{{
+<VirtualHost * >
+    DocumentRoot /var/trac/myproject
+    ServerName trac.mycompany.com
+    <Location />
+        SetHandler mod_python
+        PythonHandler trac.web.modpython_frontend
+        PythonOption TracEnv /var/trac/myproject
+        PythonOption TracUriRoot /
+    </Location>
+    <Location /login>
+        AuthType Basic
+        AuthName "MyCompany Trac Server"
+        AuthUserFile /var/trac/myproject/.htpasswd
+        Require valid-user
+    </Location>
+</VirtualHost>
+}}}
+
+For a virtual host that supports multiple projects replace "`TracEnv`" /var/trac/myproject with "`TracEnvParentDir`" /var/trac/
+
+== 문제해결 ==
+
+In general, if you get server error pages, you can either check the Apache error log, or enable the `PythonDebug` option:
+{{{
+<Location /projects/myproject>
+  ...
+  PythonDebug on
+</Location>
+}}}
+
+=== Form submission problems ===
+
+If you're experiencing problems submitting some of the forms in Trac (a common problem is that you get redirected to the start page after submission), check whether your {{{DocumentRoot}}} contains a folder or file with the same path that you mapped the mod_python handler to. For some reason, mod_python gets confused when it is mapped to a location that also matches a static resource.
+
+=== Problem with virtual host configuration ===
+
+If the <Location /> directive is used, setting the `DocumentRoot` may result in a ''403 (Forbidden)'' error. Either remove the `DocumentRoot` directive, or make sure that accessing the directory it points is allowed (in a corresponding `<Directory>` block).
+
+Using <Location /> together with `SetHandler` resulted in having everything handled by mod_python, which leads to not being able download any CSS or images/icons. I used <Location /trac> `SetHandler None` </Location> to circumvent the problem, though I do not know if this is the most elegant solution.
+
+=== .htaccess 사용하기 ===
+
+Although it may seem trivial to rewrite the above configuration as a directory in your document root with a `.htaccess` file, this does not work. Apache will append a "/" to any Trac URLs, which interferes with its correct operation.
+
+It may be possible to work around this with mod_rewrite, but I failed to get this working. In all, it is more hassle than it is worth. Stick to the provided instructions. :)
+
+=== Win32 Issues ===
+If you run trac with mod_python < 3.2 on Windows, uploading attachments will '''not''' work. This problem is resolved in mod_python 3.1.4 or later, so please upgrade mod_python to fix this.
+
+=== OS X에서의 문제점 ===
+
+OS X에서 mod_python을 사용한다면, `apachectl restart` 명령을 사용해서 Apache를 재시작할 수 없을 것입니다. 이 문제는 외관상으로는 mod_python 3.2 버전에서 고쳐졌습니다. 이전 버전에서 사용할 수 있는 [http://www.dscpl.com.au/projects/vampire/patches.html 패치]도 존재합니다.
+
+=== SELinux issues ===
+
+If Trac reports something like: ''Cannot get shared lock on db.lock''
+The security context on the repository may need to be set:
+
+{{{
+chcon -R -h -t httpd_sys_content_t PATH_TO_REPOSITORY
+}}}
+
+See also [[http://subversion.tigris.org/faq.html#reposperms]]
+
+=== FreeBSD issues ===
+Pay attention to the version of the installed mod_python and sqlite packages. Ports have both the new and old ones, but earlier versions of pysqlite and mod_python won't integrate as the former requires threaded support in python, and the latter requires a threadless install.
+
+=== Subversion issues ===
+
+If you get the following Trac Error `Unsupported version control system "svn"` only under mod_python, though it works well on the command-line and even with TracStandalone, chances are that you forgot to add the path to the Python bindings with the [TracModPython#ConfiguringPythonPath PythonPath] directive. (The better way is to add a link to the bindings in the Python `site-packages` directory, or create a `.pth` file in that directory.)
+
+If this is not the case, it's possible that you're using Subversion libraries that are binary incompatible with the apache ones (an incompatibility of the `apr` libraries is usually the cause). In that case, you also won't be able to use the svn modules for Apache (`mod_dav_svn`).
+
+----
+참고 : TracGuide, TracInstall, TracCgi, TracFastCgi

@@ -1,0 +1,29 @@
+= Trac 로깅 =
+[[TracGuideToc]]
+
+Trac은 Python과 같이 배포되는 표준 [http://docs.python.org/lib/module-logging.html 로깅 모듈]을 사용해서 시스템 메시지들을 로그로 남길 수 있게 해줍니다.
+
+로깅은 [wiki:TracIni trac.ini]파일의 {{{[logging]}}} 섹션에서 설정할 수 있습니다.
+
+== 지원되는 로깅 방법들 ==
+
+로그 방법은 다음의 값중 하나를 가지는 `log_type` 설정 옵션을 사용해서 설정됩니다.:
+ '''none'':: 모든 로그 메시지들을 금지합니다.
+ '''file''':: [wiki:TracIni trac.ini] 파일의 `log_file` 옵션에서 설정한 파일로 로그메시지를 저장합니다.
+ '''stderr''':: 모든 로그메시지를 콘솔로 내보냅니다. ([wiki:TracStandalone tracd]에서만 가능합니다.)
+ '''syslog''':: (UNIX) `/dev/log`로 이름붙은 파이프를 통해서 syslogd로 메시지를 보냅니다.
+ '''eventlog''':: (Windows) Trac의 로깅을 위해서 NT의 eventlog를 사용합니다.
+
+== 로그 레벨 ==
+
+로그 메시지의 출력 레벨은 [wiki:TracIni trac.ini] 파일의 ''log_level'' 옵션을 통해서 설정될 수 있습니다. 로그레벨은 로그로 남길 메시지의 중요성의 최소 레벨을 정의합니다.
+
+사용 가능한 레벨은:
+ '''CRITICAL''':: 가장 치명적인 에러들만을 남깁니다.
+ '''ERROR''':: 실패, 버그, 에러에 대해 로그를 남깁니다.
+ '''WARN''':: 경고, non-interrupting events에 대한 로그를 남깁니다.
+ '''INFO''':: 진단 정보 그리고 모든 처리에 대한 로그 정보를 남깁니다.
+ '''DEBUG''':: Trace messages, profiling, etc.
+
+----
+참고 : TracIni, TracGuide, TracEnvironment

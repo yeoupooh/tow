@@ -1,0 +1,42 @@
+= TracAdmin =
+[[TracGuideToc]]
+
+Trac은 강력한 명령라인의 환경설정 툴과 함께 배포됩니다. 이 툴은 설치된 Trac을 원하는 형태로 설정하거나 커스터마이즈하는데 사용되어질 수 있습니다.
+
+아래의 명령들 중 일부는 현재는 분리되어서 배포되는 [http://trac.edgewall.org/wiki/WebAdmin WebAdmin] 플러그인을 사용해서 웹인터페이스를 통해서 동작할 수 있습니다.
+
+== 사용법 ==
+
+다음과 같이 `trac-admin` 명령에 help 파라메터를 주어서 실행하면, 이용 가능한 옵션들과 명령들의 전체 리스트를 볼 수 있습니다.
+{{{
+trac-admin help
+}}}
+
+만약 `help`, `about` 혹은 `version` 파라메터를 주어서 실행하는 것이 아니라면, 첫번째 파라메터로 관리(설정)하기를 원하는 [wiki:TracEnvironment Trac 저장소]의 경로를 지정해 주어야 합니다.
+
+예를 들면 다음과 같습니다.
+{{{
+trac-admin /path/to/projenv wiki list
+}}}
+
+== 상호 동작 모드 ==
+
+단지 [wiki:TracEnvironment Trac 저장소]의 경로만을 파라메터로 넘겨준 경우에는, `trac-admin`은 상호동작 모드로 동작하게 됩니다.
+Tab 자동완성 기능을 제공하는 trac-admin의 프롬프트상에서 입력한 명령들은 선택된 [wiki:TracEnvironment Trac 저장소]에 대해서 실행될 것입니다.
+(Tab 자동완성 기능은 윈도우 환경이 아니고, Python의 `readline` 모듈이 이용 가능해야만 동작합니다.)
+그리고 마지막에 수행된 명령은 자동으로 반복됩니다.
+
+상호동작 모드에 있다면, 특정 명령에 대해서 도움말을 볼 수 있습니다.
+
+예를 들면, `resync` 명령에 대한 도움말을 보려면, 다음 명령을 실행하십시오.:
+{{{
+> help resync
+}}}
+
+Wiki와 관련된 모든 명령에 대한 도움말이 필요하다면, 다음 명령을 실행하십시오.:
+{{{
+> help wiki
+}}}
+
+----
+참고 : TracGuide, TracBackup, TracPermissions. TracEnvironment, TracIni

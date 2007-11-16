@@ -1,0 +1,29 @@
+= Trac에서 RSS 사용하기 =
+[[TracGuideToc]]
+
+Trac의 모듈들중에 몇 개는 RSS(Really Simple Syndication)의 XML 포맷을 사용해서 context syndication을 지원합니다.
+Trac에서 RSS를 사용하면, 프로젝트, 티켓 혹은 파일의 변화까지도 쉽게 모니터링할 수 있습니다.
+
+Trac은 다음과 같이 RSS feed를 지원합니다.:
+
+ * [wiki:TracTimeline Trac 시간이력] -- '''프로젝트 변경사항'''을 모니터링할 경우에 RSS feed를 사용하십시오.[[BR]]사용하는 RSS 리더 프로그램에서 프로젝트의 전체 진행과정을 모니터링할 수 있습니다.
+ * TracTickets, TracReports, and TracQuery -- Allows syndication of report and ticket query results.[[br]]Be notified about important and relevant issue tickets.
+ * TracBrowser and TracRevisionLog -- Syndication of file changes.[[br]]Stay up to date with changes to a specific file or directory.
+
+== RSS 데이타에 접근하기 ==
+Anywhere in Trac where RSS is available, you should find a small orange '''XML''' icon, typically placed at the bottom of the page. Clicking the icon will access the RSS feed for that specific resource.
+
+'''주의:''' 각 모듈들은 RSS feed에서 서로 다른 데이타를 제공합니다. 일반적으로 현재 페이지에 적당한 정보를 제공합니다. 예를 들면, 리포트 페이지에서 RSS 링크를 클릭했다면, 해당 리포트에 대한 RSS feed를 받을 것입니다. 이것은 RSS feed가 ''현재 보여지고 있는 데이타에 대한 또 다른 정보''를 제공한다고 생각할 수 있습니다.
+
+== 링크들 ==
+ * http://blogs.law.harvard.edu/tech/rss -- RSS 2.0 Specification
+ * http://www.mozilla.org/products/firefox/ -- Mozilla Firefox supports [http://www.mozilla.org/products/firefox/live-bookmarks.html live bookmarks] using RSS
+ * http://sage.mozdev.org -- Sage RSS and Atom feed aggregator for Mozilla Firefox
+ * http://pim.kde.org/users.php -- [http://kde.org KDE] RSS Reader for Linux/BSD/*n*x systems
+ * http://www.rssreader.com/ -- Free and powerful RSS Reader for Windows
+ * http://liferea.sourceforge.net/ -- Open source GTK2 RSS Reader for Linux
+ * http://akregator.sourceforge.net/ -- Open source KDE RSS Reader (part of KDE-PIM)
+ * http://www.sharpreader.net/ -- A free RSS Reader written in .NET for Windows
+ * http://ranchero.com/netnewswire/ -- An excellent RSS reader for Mac OS X (has both free and pay versions)
+----
+참고 : TracGuide, TracTimeline, TracReports, TracBrowser
