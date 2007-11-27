@@ -10,7 +10,8 @@ set TOW_LICENSE=http://creativecommons.org/licenses/by-sa/2.0/
 set SVN_HOME=%TOW_HOME%\Subversion
 set PYTHON_HOME=%TOW_HOME%\Python
 set PYTHONPATH=%PYTHON_HOME%;%PYTHON_HOME%\DLLs;%PYTHON_HOME%\Scripts;%PYTHON_HOME%\Lib;
-rem %PYTHON_HOME%\Lib\lib-tk;%PYTHON_HOME%\Lib\site-packages;%PYTHON_HOME%\Lib\site-packages\mod_python
+rem additional python path (not used)
+rem set PYTHONPATH=%PYTHONPATH%;%PYTHON_HOME%\Lib\lib-tk;%PYTHON_HOME%\Lib\site-packages;%PYTHON_HOME%\Lib\site-packages\mod_python
 set APACHE_HOME=%TOW_HOME%\Apache
 set SQLITE_HOME=%TOW_HOME%\SQLite
 
