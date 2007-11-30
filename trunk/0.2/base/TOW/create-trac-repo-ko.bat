@@ -21,11 +21,11 @@ echo REPOSPATH=%_REPOSPATH%
 echo TEMPLATEPATH=%_TEMPLATEPATH%
 
 %PYTHON_HOME%\python %PYTHON_HOME%\Scripts\trac-admin	"%TOW_TRAC_PRJ%\%1" initenv %_PROJECTNAME% %_DB% %_REPOSTYPE% %_REPOSPATH% %_TEMPLATEPATH%
-echo Trac repository[%TOW_SVN_PRJ%\%1] created.
+echo Trac 저장소 [%TOW_SVN_PRJ%\%1] 가 만들어졌습니다.
 
 goto end
 
 :usage
-echo Usage: %0 ^<project name^>
+echo 사용법: %0 ^<프로젝트명^>
 
 :end
