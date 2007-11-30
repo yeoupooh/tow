@@ -1,12 +1,12 @@
-= TOW (Trac On Windows) ¼³Ä¡¿¡ ¼º°øÇÏ¿´½À´Ï´Ù.  =
- * ÇÁ·ÎÁ§Æ® ºí·Î±×: [http://traconwindows.wordpress.com]
- * ÇÁ·ÎÁ§Æ® »çÀÌÆ®: [http://sourceforge.net/projects/traconwindows]
- * °³¹ßÀÚ: Jinwoo Min (yeoupooh at gmail dot com)
- * ÀúÀÛ±Ç: http://creativecommons.org/licenses/by-sa/2.0/
+= TOW (Trac On Windows) ì„¤ì¹˜ì— ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤. =
+ * í”„ë¡œì íŠ¸ ë¸”ë¡œê·¸: [http://traconwindows.wordpress.com]
+ * í”„ë¡œì íŠ¸ ì‚¬ì´íŠ¸: [http://sourceforge.net/projects/traconwindows]
+ * ê°œë°œì: Jinwoo Min (yeoupooh at gmail dot com)
+ * ì €ì‘ê¶Œ: http://creativecommons.org/licenses/by-sa/2.0/
  
-== TOW 0.2 ±âº» ÆĞÅ°Áö¿¡ ¼³Ä¡µÇ´Â °Í ==
+== TOW 0.2 ê¸°ë³¸ íŒ¨í‚¤ì§€ (í•œê¸€íŒ)ì— ì„¤ì¹˜ë˜ëŠ” ê²ƒ ==
  * python 2.4.4
- * trac 0.10.4
+ * trac-ko 0.10.4
  * clearsilver 0.9.14
  * apache 2.2.6
  * mod_python 3.3.1
@@ -16,10 +16,10 @@
  * pysqlite 2.3.5
  * easy_install
  
-== TOW 0.2 Ç¥ÁØ ÆĞÅ°Áö¿¡ ¼³Ä¡µÇ´Â °Í ==
- * TOW 0.2 ±âº» ÆĞÅ°Áö Æ÷ÇÔ
- * admin °èÁ¤¿¡ TRAC_ADMIN ±ÇÇÑÀÌ »ı±è.
- * ÇÃ·¯±×ÀÎ
+== TOW 0.2 í‘œì¤€ íŒ¨í‚¤ì§€ (í•œê¸€íŒ)ì— ì„¤ì¹˜ë˜ëŠ” ê²ƒ ==
+ * TOW 0.2 ê¸°ë³¸ íŒ¨í‚¤ì§€ (í•œê¸€íŒ) í¬í•¨
+ * admin ê³„ì •ì— TRAC_ADMIN ê¶Œí•œì´ ìƒê¹€.
+ * í”ŒëŸ¬ê·¸ì¸
    * Web Admin Plugin !r6060
    * Account Manager Plugin !r2548
    * XML-RPC Plugin !r2800
@@ -27,39 +27,39 @@
    * WYSIWYG Editor Plugin !r2820
    * trac.ini Admin Plugin !r2825
    * !TracNav 3.92
- * ¸ÅÅ©·Î
+ * ë§¤í¬ë¡œ
    * TOC Macro !r2828
   
-= TOW ¼³Ä¡ =
+= TOW ì„¤ì¹˜ =
 
-== ¼³Ä¡ ÀıÂ÷ ==
- * ÀÌ¹Ì SubversionÀÌ³ª PythonÀÌ ¼³Ä¡µÇ¾î ÀÖ´Ù¸é Áö¿ì½Ê½Ã¿À. TOW¿Í Ãæµ¹ÇÒ ¼ö ÀÖ½À´Ï´Ù.
- * TOW-*.zip ÆÄÀÏÀ» C:\ ¿¡ Ç±´Ï´Ù. (´Ù¸¥ µğ·ºÅä·¹ Ç®¸é ½ÇÇàÀÌ ¾ÈµÉ°Ì´Ï´Ù.) 
- * start-tow.bat ½ÇÇàÇÕ´Ï´Ù.
+== ì„¤ì¹˜ ì ˆì°¨ ==
+ * ì´ë¯¸ Subversionì´ë‚˜ Pythonì´ ì„¤ì¹˜ë˜ì–´ ìˆë‹¤ë©´ ì§€ìš°ì‹­ì‹œì˜¤. TOWì™€ ì¶©ëŒí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+ * TOW-*.zip íŒŒì¼ì„ C:\ ì— í’‰ë‹ˆë‹¤. (ë‹¤ë¥¸ ë””ë ‰í† ë ˆ í’€ë©´ ì‹¤í–‰ì´ ì•ˆë ê²ë‹ˆë‹¤.) 
+ * start-tow.bat ì‹¤í–‰í•©ë‹ˆë‹¤.
 {{{
 C:\TOW>start-tow.bat
 }}}
- * ¼³Ä¡ ³¡!
+ * ì„¤ì¹˜ ë!
 
-== ¼³Ä¡ Å×½ºÆ® ==
- * http://localhost:8080/projects/HelloTOW ¿¡ Á¢¼ÓÇÕ´Ï´Ù.
+== ì„¤ì¹˜ í…ŒìŠ¤íŠ¸ ==
+ * http://localhost:8080/projects/HelloTOW ì— ì ‘ì†í•©ë‹ˆë‹¤.
 
-= TOW °ü¸® =
- * admin °èÁ¤ÀÇ ±âº» ºñ¹Ğ¹øÈ£´Â towadmin ÀÔ´Ï´Ù. ¹İµå½Ã º¯°æÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
+= TOW ê´€ë¦¬ =
+ * admin ê³„ì •ì˜ ê¸°ë³¸ ë¹„ë°€ë²ˆí˜¸ëŠ” towadmin ì…ë‹ˆë‹¤. ë°˜ë“œì‹œ ë³€ê²½í•˜ì‹œê¸° ë°”ëë‹ˆë‹¤.
 
-== »ç¿ëÀÚ Ãß°¡ ==
+== ì‚¬ìš©ì ì¶”ê°€ ==
 {{{
-C:\TOW>add-user.bat <»ç¿ëÀÚID> <ºñ¹Ğ¹øÈ£>
+C:\TOW>add-user.bat <ì‚¬ìš©ìID> <ë¹„ë°€ë²ˆí˜¸>
 }}}
 
-== ÇÁ·ÎÁ§Æ® Ãß°¡ ==
+== í”„ë¡œì íŠ¸ ì¶”ê°€ ==
 {{{
-C:\TOW>create-svn-repo.bat <ÇÁ·ÎÁ§Æ®¸í>
-C:\TOW>create-trac-repo.bat <ÇÁ·ÎÁ§Æ®¸í>
+C:\TOW>create-svn-repo.bat <í”„ë¡œì íŠ¸ëª…>
+C:\TOW>create-trac-repo.bat <í”„ë¡œì íŠ¸ëª…>
 }}}
 
-=== ÇÃ·¯±×ÀÎ È°¼ºÈ­ÇÏ±â (Ç¥ÁØ ÆĞÅ°Áö »ç¿ëÀÚµé¸¸ ÇØ´çµË´Ï´Ù.) ===
- * ÇÁ·ÎÁ§Æ®º°·Î trac.ini ÆÄÀÏ¿¡ ¾Æ·¡ÀÇ ³»¿ëÀ» µ¡ºÙÀÌ°Å³ª ¼öÁ¤ÇÕ´Ï´Ù. (C:\TOW\!TracRepo\Projects\<!ÇÁ·ÎÁ§Æ®¸í>\conf\trac.ini)
+=== í”ŒëŸ¬ê·¸ì¸ í™œì„±í™”í•˜ê¸° (í‘œì¤€ íŒ¨í‚¤ì§€ ì‚¬ìš©ìë“¤ë§Œ í•´ë‹¹ë©ë‹ˆë‹¤.) ===
+ * í”„ë¡œì íŠ¸ë³„ë¡œ trac.ini íŒŒì¼ì— ì•„ë˜ì˜ ë‚´ìš©ì„ ë§ë¶™ì´ê±°ë‚˜ ìˆ˜ì •í•©ë‹ˆë‹¤. (C:\TOW\!TracRepo\Projects\<!í”„ë¡œì íŠ¸ëª…>\conf\trac.ini)
 {{{
 [components]
 acct_mgr.web_ui.loginmodule = enabled
@@ -74,13 +74,13 @@ tracwysiwyg.* = enabled
 webadmin.* = enabled
 }}}
  
-== trac-admin ½ÇÇàÇÏ±â ==
+== trac-admin ì‹¤í–‰í•˜ê¸° ==
 {{{
 C:\TOW>trac-admin.bat <ProjectName> <Commands>
 }}}
  * [http://trac.edgewall.org/wiki/TracAdmin TracAdmin]
  
-== easy_install ½ÇÇàÇÏ±â ==
+== easy_install ì‹¤í–‰í•˜ê¸° ==
 {{{
 C:\TOW>easy_install.bat <Arguments>
 }}}
