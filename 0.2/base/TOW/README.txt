@@ -4,8 +4,9 @@
  * Author: Jinwoo Min (yeoupooh at gmail dot com)
  * License: http://creativecommons.org/licenses/by-sa/2.0/
  
-== TOW 0.2 Base package includes ==
+== TOW 0.2.2 Base package includes ==
  * python 2.4.4
+ * python for windows extensions build 210
  * trac 0.10.4
  * clearsilver 0.9.14
  * apache 2.2.6
@@ -16,15 +17,15 @@
  * pysqlite 2.3.5
  * easy_install
  
-== TOW 0.2 Standard package includes ==
- * TOW 0.2 Base package
+== TOW 0.2.2 Standard package includes ==
+ * TOW 0.2.2 Base package
  * admin account has TRAC_ADMIN permission.
  * Plugins
    * Web Admin Plugin !r6060
    * Account Manager Plugin !r2548
-   * XML-RPC Plugin !r2800
-   * Eclipse Trac Integration !r2801
-   * WYSIWYG Editor Plugin !r2820
+   * XML-RPC Plugin !r2874
+   * Eclipse Trac Integration !r2874
+   * WYSIWYG Editor Plugin !r2856
    * trac.ini Admin Plugin !r2825
    * !TracNav 3.92
  * Macros

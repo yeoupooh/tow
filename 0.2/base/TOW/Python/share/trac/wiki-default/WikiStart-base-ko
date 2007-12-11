@@ -4,8 +4,9 @@
  * 개발자: Jinwoo Min (yeoupooh at gmail dot com)
  * 저작권: http://creativecommons.org/licenses/by-sa/2.0/
  
-== TOW 0.2 기본 패키지 (한글판)에 설치되는 것 ==
+== TOW 0.2.2 기본 패키지 (한글판)에 설치되는 것 ==
  * python 2.4.4
+ * python for windows extensions build 210
  * trac-ko 0.10.4
  * clearsilver 0.9.14
  * apache 2.2.6
@@ -16,8 +17,8 @@
  * pysqlite 2.3.5
  * easy_install
  
-== TOW 0.2 표준 패키지 (한글판)에 설치되는 것 ==
- * TOW 0.2 기본 패키지 (한글판) 포함
+== TOW 0.2.2 표준 패키지 (한글판)에 설치되는 것 ==
+ * TOW 0.2.2 기본 패키지 (한글판) 포함
  * admin 계정에 TRAC_ADMIN 권한이 생김.
  * 플러그인
    * Web Admin Plugin !r6060
