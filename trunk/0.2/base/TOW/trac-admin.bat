@@ -9,6 +9,6 @@ call set-tow.bat
 goto end
 
 :usage
-echo Usage: %0 ^<project name^> ^<commands^>
+echo Usage: %0 ^<ProjectName^> ^<Commands^>
 
 :end

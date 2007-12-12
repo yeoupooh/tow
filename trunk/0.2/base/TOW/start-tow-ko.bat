@@ -19,6 +19,4 @@ echo http://localhost:8080/projects/HelloTOW 로 접속해서 테스트 해보십시오.
 
 %APACHE_HOME%\bin\httpd
 
-
-
 pause
