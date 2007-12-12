@@ -12,6 +12,8 @@ set TOW_RES_AUTHOR=Author
 set TOW_RES_SITE=Site
 set TOW_RES_LICENSE=License
 
+if "%1"=="INIT_TOW_USAGE" echo WARNING: This script is for TOW Developer.
+
 if "%1"=="LAUNCHED" echo %2 Launched.
 if "%1"=="TEST_HERE" echo Now, you can test in %2
 
