@@ -13,6 +13,6 @@ echo Initial contents imported.
 goto end
 
 :usage
-echo Usage: %0 ^<project name^>
+echo Usage: %0 ^<ProjectName^>
 
 :end

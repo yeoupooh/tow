@@ -19,6 +19,4 @@ echo Now, you can test in http://localhost:8080/projects/HelloTOW
 
 %APACHE_HOME%\bin\httpd
 
-
-
 pause
