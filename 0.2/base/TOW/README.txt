@@ -1,6 +1,3 @@
-[[TracNav]]
-[[TOC]]
-
 == Welcome to TOW (Trac On Windows) ==
  * Blog & User Guide: [http://traconwindows.wordpress.com]
  * Project Site & Download: [http://sourceforge.net/projects/traconwindows]
