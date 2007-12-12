@@ -1,8 +1,8 @@
 @echo off
 
-if "%2"=="" goto usage
-
 call set-tow.bat
+
+if "%2"=="" goto usage
 
 %APACHE_HOME%\bin\htpasswd -b %TOW_SVN_PRJ%\trac.htpasswd %1 %2
 

@@ -4,7 +4,7 @@ set TOW_HOME=C:\TOW
 set TOW_NAME=TOW (TracOnWindows)
 set TOW_VERSION=0.2.2
 rem en, ko
-set TOW_LANG=ko
+set TOW_LANG=en
 rem base, std
 set TOW_PACKAGE=base
 set TOW_AUTHOR=Jinwoo Min (yeoupooh at gmail dot com)
@@ -20,6 +20,9 @@ rem additional python path (not used)
 rem set PYTHONPATH=%PYTHONPATH%;%PYTHON_HOME%\Lib\lib-tk;%PYTHON_HOME%\Lib\site-packages;%PYTHON_HOME%\Lib\site-packages\mod_python
 set APACHE_HOME=%TOW_HOME%\Apache
 set SQLITE_HOME=%TOW_HOME%\SQLite
+
+set TOW_SETUP_HOME=%TOW_HOME%\Setup
+set TOW_TEST_PROJECT=HelloTOW
 
 set TOW_SVN_REPO=%TOW_HOME%\SvnRepo
 set TOW_TRAC_REPO=%TOW_HOME%\TracRepo

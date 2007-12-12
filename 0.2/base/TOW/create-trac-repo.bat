@@ -1,8 +1,8 @@
 @echo off
 
-if "%1"=="" goto usage
-
 call set-tow.bat
+
+if "%1"=="" goto usage
 
 rem trac-admin
 rem initenv <projectname> <db> <repostype> <repospath> <templatepath>
@@ -23,7 +23,7 @@ echo TEMPLATEPATH=%_TEMPLATEPATH%
 %PYTHON_HOME%\python %PYTHON_HOME%\Scripts\trac-admin "%TOW_TRAC_PRJ%\%1" initenv %_PROJECTNAME% %_DB% %_REPOSTYPE% %_REPOSPATH% %_TEMPLATEPATH%
 call lang TRAC_REPO_CREATED %TOW_SVN_PRJ%\%1
 
-copy %TOW_HOME%\TracTemplate\conf\trac.ini "%TOW_TRAC_PRJ%\%1\conf"
+copy %TOW_SETUP_HOME%\TracRepo\Projects\%TOW_TEST_PROJECT%\conf\trac-%TOW_PACKAGE%-%TOW_LANG%.ini "%TOW_TRAC_PRJ%\%1\conf\trac.ini"
 call lang TRAC_INI_COPIED
 
 if "%TOW_PACKAGE%"=="base" goto end

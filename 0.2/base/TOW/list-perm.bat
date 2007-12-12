@@ -1,8 +1,8 @@
 @echo off
 
-if "%1"=="" goto usage
-
 call set-tow.bat
+
+if "%1"=="" goto usage
 
 %PYTHON_HOME%\python %PYTHON_HOME%\Scripts\trac-admin "%TOW_TRAC_PRJ%\%1" permission list %2
 
