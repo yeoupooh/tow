@@ -12,6 +12,8 @@ set TOW_RES_AUTHOR=개발자
 set TOW_RES_SITE=홈페이지
 set TOW_RES_LICENSE=저작권
 
+if "%1"=="INIT_TOW_USAGE" echo 경고: 이 배치파일은 TOW 개발자만 사용합니다.
+
 if "%1"=="LAUNCHED" echo %2 를 실행하였습니다.
 if "%1"=="TEST_HERE" echo %2 로 접속해서 테스트 해보십시오.
 

@@ -26,6 +26,7 @@ call lang TRAC_REPO_CREATED %TOW_SVN_PRJ%\%1
 copy %TOW_HOME%\TracTemplate\conf\trac.ini "%TOW_TRAC_PRJ%\%1\conf"
 call lang TRAC_INI_COPIED
 
+if "%TOW_PACKAGE%"=="base" goto end
 %PYTHON_HOME%\python %PYTHON_HOME%\Scripts\trac-admin "%TOW_TRAC_PRJ%\%1" permission add admin TRAC_ADMIN
 %PYTHON_HOME%\python %PYTHON_HOME%\Scripts\trac-admin "%TOW_TRAC_PRJ%\%1" permission add admin XML_RPC
 call lang TRAC_ADMIN_SET

@@ -1,13 +1,12 @@
 @echo off
 
+set TOW_HOME=C:\TOW
+set TOW_NAME=TOW (TracOnWindows)
+set TOW_VERSION=0.2.2
 rem en, ko
 set TOW_LANG=ko
 rem base, std
 set TOW_PACKAGE=base
-
-set TOW_HOME=C:\TOW
-set TOW_NAME=TOW (TracOnWindows)
-set TOW_VERSION=0.2.2
 set TOW_AUTHOR=Jinwoo Min (yeoupooh at gmail dot com)
 set TOW_SITE=http://sourceforge.net/projects/traconwindows
 set TOW_LICENSE=http://creativecommons.org/licenses/by-sa/2.0/
