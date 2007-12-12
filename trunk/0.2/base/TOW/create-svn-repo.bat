@@ -1,8 +1,8 @@
 @echo off
 
-if "%1"=="" goto usage
-
 call set-tow.bat
+
+if "%1"=="" goto usage
 
 "%SVN_HOME%\bin\svnadmin" create --fs-type=fsfs "%TOW_SVN_PRJ%\%1"
 call lang SVN_REPO_CREATED "%TOW_SVN_PRJ%\%1"
