@@ -9,6 +9,6 @@ call set-tow.bat
 goto end
 
 :usage
-echo Usage: %0 ^<ProjectName^> ^<UserName^> ^<Permissions^>
+call lang ADD_REMOVE_PERM_USAGE %0
 
 :end

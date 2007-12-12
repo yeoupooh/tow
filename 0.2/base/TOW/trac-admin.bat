@@ -9,6 +9,6 @@ call set-tow.bat
 goto end
 
 :usage
-echo Usage: %0 ^<ProjectName^> ^<Commands^>
+call lang TRAC_ADMIN_USAGE %0
 
 :end
