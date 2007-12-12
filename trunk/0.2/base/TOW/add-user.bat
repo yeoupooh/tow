@@ -9,6 +9,6 @@ call set-tow.bat
 goto end
 
 :usage
-echo Usage: %0 ^<UserName^> ^<Password^>
+call lang ADD_USER_USAGE %0
 
 :end

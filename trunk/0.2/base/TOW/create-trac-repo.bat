@@ -21,18 +21,18 @@ echo REPOSPATH=%_REPOSPATH%
 echo TEMPLATEPATH=%_TEMPLATEPATH%
 
 %PYTHON_HOME%\python %PYTHON_HOME%\Scripts\trac-admin "%TOW_TRAC_PRJ%\%1" initenv %_PROJECTNAME% %_DB% %_REPOSTYPE% %_REPOSPATH% %_TEMPLATEPATH%
-echo Trac repository[%TOW_SVN_PRJ%\%1] created.
+call lang TRAC_REPO_CREATED %TOW_SVN_PRJ%\%1
 
 copy %TOW_HOME%\TracTemplate\conf\trac.ini "%TOW_TRAC_PRJ%\%1\conf"
-echo Initial trac.ini copied.
+call lang TRAC_INI_COPIED
 
 %PYTHON_HOME%\python %PYTHON_HOME%\Scripts\trac-admin "%TOW_TRAC_PRJ%\%1" permission add admin TRAC_ADMIN
 %PYTHON_HOME%\python %PYTHON_HOME%\Scripts\trac-admin "%TOW_TRAC_PRJ%\%1" permission add admin XML_RPC
-echo Gave TRAC_ADMIN, XML_RPC permissions to admin account.
+call lang TRAC_ADMIN_SET
 
 goto end
 
 :usage
-echo Usage: %0 ^<ProjectName^>
+call lang CREATE_TRAC_REPO_USAGE %0
 
 :end
