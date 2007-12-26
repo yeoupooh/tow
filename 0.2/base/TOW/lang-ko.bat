@@ -32,3 +32,5 @@ if "%1"=="ADD_USER_USAGE" echo [TOW] 사용법: %2 ^<사용자이름^> ^<비밀번호^>
 
 if "%1"=="ADD_REMOVE_PERM_USAGE" echo [TOW] 사용법: %2 ^<프로젝트명^> ^<사용자이름^> ^<권한들^>
 if "%1"=="LIST_PERM_USAGE" echo [TOW] 사용법: %2 ^<프로젝트명^> ^[사용자이름^]
+
+if "%1"=="ADD_PROJECT_USAGE" echo [TOW] 사용법: %2 ^<프로젝트명^>

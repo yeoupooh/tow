@@ -32,3 +32,5 @@ if "%1"=="ADD_USER_USAGE" echo [TOW] Usage: %2 ^<UserName^> ^<Password^>
 
 if "%1"=="ADD_REMOVE_PERM_USAGE" echo [TOW] Usage: %2 ^<ProjectName^> ^<UserName^> ^<Permissions^>
 if "%1"=="LIST_PERM_USAGE" echo [TOW] Usage: %2 ^<ProjectName^> ^[UserName^]
+
+if "%1"=="ADD_PROJECT_USAGE" echo [TOW] Usage: %2 ^<ProjectName^>
