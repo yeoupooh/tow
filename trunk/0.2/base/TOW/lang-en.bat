@@ -15,7 +15,8 @@ set TOW_RES_LICENSE=License
 if "%1"=="INIT_TOW_USAGE" echo [TOW] WARNING: This script is for TOW Developer.
 
 if "%1"=="LAUNCHED" echo [TOW] %2 Launched.
-if "%1"=="TEST_HERE" echo [TOW] Now, you can test in %2
+if "%1"=="TEST_TRAC_HERE" echo [TOW] Now, you can test Trac in %2
+if "%1"=="TEST_SVN_HERE" echo [TOW] And you can test Subversion in %2
 
 if "%1"=="SVN_REPO_CREATED" echo [TOW] Subversion repository[%2] created.
 if "%1"=="SVN_REPO_IMPORTED" echo [TOW] Initial contents imported.

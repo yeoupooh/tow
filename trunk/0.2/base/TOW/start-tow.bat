@@ -20,7 +20,8 @@ echo SQLITE_HOME = %SQLITE_HOME%
 echo.
 
 call lang LAUNCHED %TOW_NAME%
-call lang TEST_HERE http://localhost:8080/projects/HelloTOW
+call lang TEST_TRAC_HERE http://localhost:8080/projects/HelloTOW
+call lang TEST_SVN_HERE http://localhost:8080/svn/HelloTOW
 
 %APACHE_HOME%\bin\httpd
 
