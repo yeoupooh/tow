@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-[account-manager]
-password_file = c:\TOW\SvnRepo\Projects\trac.htpasswd
-password_store = HtPasswdStore
-
 [attachment]
 max_size = 262144
 render_unsafe_content = false
@@ -18,30 +14,8 @@ max_diff_bytes = 10000000
 max_diff_files = 0
 wiki_format_messages = true
 
-[components]
-acct_mgr.admin.accountmanageradminpage = enabled
-acct_mgr.api.accountmanager = enabled
-acct_mgr.db.sessionstore = disabled
-acct_mgr.htfile.abstractpasswordfilestore = disabled
-acct_mgr.htfile.htdigeststore = disabled
-acct_mgr.htfile.htpasswdstore = enabled
-acct_mgr.http.httpauthstore = enabled
-acct_mgr.pwhash.htdigesthashmethod = disabled
-acct_mgr.pwhash.htpasswdhashmethod = disabled
-acct_mgr.web_ui.accountmodule = enabled
-acct_mgr.web_ui.loginmodule = disabled
-acct_mgr.web_ui.registrationmodule = enabled
-iniadmin.iniadmin.iniadminplugin = enabled
-trac.web.auth.loginmodule = enabled
-tracnav.* = enabled
-tracrpc.* = enabled
-tracrpcext.* = enabled
-tractoc.* = enabled
-tracwysiwyg.* = enabled
-webadmin.* = enabled
-
 [header_logo]
-alt = HelloTOW
+alt = %PROJECT_NAME%
 height = -1
 link = http://traconwindows.wordpress.com/
 src = common/trac_banner.png
@@ -81,10 +55,10 @@ use_short_addr = false
 use_tls = false
 
 [project]
-descr = Hello TOW project
+descr = %PROJECT_NAME% project
 footer = Visit the Trac open source project at<br /><a href="http://trac.edgewall.org/">http://trac.edgewall.org/</a>
 icon = common/trac.ico
-name = HelloTOW
+name = %PROJECT_NAME%
 url = http://traconwindows.wordpress.com/
 
 [search]
@@ -110,14 +84,14 @@ authz_module_name =
 base_url = 
 check_auth_ip = true
 database = sqlite:db/trac.db
-default_charset = euc-kr
+default_charset = iso-8859-15
 default_handler = WikiModule
 htdocs_location = 
 ignore_auth_case = false
 mainnav = wiki,timeline,roadmap,browser,tickets,newticket,search
 metanav = login,logout,settings,help,about
 permission_store = DefaultPermissionStore
-repository_dir = C:\\TOW\\SvnRepo\\Projects\\HelloTOW
+repository_dir = C:\\TOW\\SvnRepo\\Projects\\%PROJECT_NAME%
 repository_type = svn
 templates_dir = C:\\TOW\\Python\\share\\trac\\templates
 timeout = 20

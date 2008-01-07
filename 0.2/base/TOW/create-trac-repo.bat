@@ -23,7 +23,7 @@ echo TEMPLATEPATH=%_TEMPLATEPATH%
 %PYTHON_HOME%\python %PYTHON_HOME%\Scripts\trac-admin "%TOW_TRAC_PRJ%\%1" initenv %_PROJECTNAME% %_DB% %_REPOSTYPE% %_REPOSPATH% %_TEMPLATEPATH%
 call lang TRAC_REPO_CREATED %TOW_SVN_PRJ%\%1
 
-copy %TOW_SETUP_HOME%\TracRepo\Projects\%TOW_TEST_PROJECT%\conf\trac-%TOW_PACKAGE%-%TOW_LANG%.ini "%TOW_TRAC_PRJ%\%1\conf\trac.ini"
+%PYTHON_HOME%\python rep-copy.py %_PROJECTNAME% %TOW_SETUP_HOME%\TracRepo\Projects\%TOW_TEST_PROJECT%\conf\trac-%TOW_PACKAGE%-%TOW_LANG%.ini.tpl "%TOW_TRAC_PRJ%\%1\conf\trac.ini"
 call lang TRAC_INI_COPIED
 
 if "%TOW_PACKAGE%"=="base" goto end
