@@ -2,7 +2,7 @@
 
 set TOW_HOME=C:\TOW
 set TOW_NAME=TOW (TracOnWindows)
-set TOW_VERSION=0.2.2
+set TOW_VERSION=0.2.2a
 rem en, ko
 set TOW_LANG=en
 rem base, std
