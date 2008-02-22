@@ -15,8 +15,8 @@ set TOW_RES_LICENSE=저작권
 if "%1"=="INIT_TOW_USAGE" echo [TOW] 경고: 이 배치파일은 TOW 개발자만 사용합니다.
 
 if "%1"=="LAUNCHED" echo [TOW] %2 를 실행하였습니다.
-if "%1"=="TEST_TRAC_HERE" echo [TOW] Trac을 테스트하시려면 %2 로 접속하세요.
-if "%1"=="TEST_SVN_HERE" echo [TOW] Subversion을 테스트하시려면 %2 로 접속하세요.
+if "%1"=="TEST_TRAC_HERE" echo [TOW] 테스트용 Trac은 %2 로 접속하세요.
+if "%1"=="TEST_SVN_HERE" echo [TOW] 테스트용 Subversion은 %2 로 접속하세요.
 
 if "%1"=="SVN_REPO_CREATED" echo [TOW] Subversion 저장소 [%2] 가 만들어졌습니다.
 if "%1"=="SVN_REPO_IMPORTED" echo [TOW] 초기 컨텐츠를 올렸습니다.
