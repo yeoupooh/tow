@@ -14,6 +14,7 @@ set TOW_LICENSE=http://creativecommons.org/licenses/by-sa/2.0/
 call lang
 
 set SVN_HOME=%TOW_HOME%\Subversion
+set APR_ICONV_PATH=%SVN_HOME%\iconv
 set PYTHON_HOME=%TOW_HOME%\Python
 set PYTHONPATH=%PYTHON_HOME%;%PYTHON_HOME%\DLLs;%PYTHON_HOME%\Scripts;%PYTHON_HOME%\Lib;
 rem additional python path (not used)
