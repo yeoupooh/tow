@@ -24,6 +24,7 @@ if "%1"=="CREATE_SVN_REPO_USAGE" echo [TOW] 사용법: %2 ^<프로젝트명^>
 
 if "%1"=="TRAC_REPO_CREATED" echo [TOW] Trac 저장소 [%2] 가 만들어졌습니다.
 if "%1"=="TRAC_INI_COPIED" echo [TOW] 기본적으로 설정된 trac.ini 를 복사했습니다.
+if "%1"=="TRAC_BANNER_COPIED" echo [TOW] Trac 배너 이미지를 복사했습니다.
 if "%1"=="TRAC_ADMIN_SET" echo [TOW] admin 계정에 TRAC_ADMIN, XML_RPC 권한을 부여했습니다.
 if "%1"=="CREATE_TRAC_REPO_USAGE" echo [TOW] 사용법: %2 ^<프로젝트명^>
 
