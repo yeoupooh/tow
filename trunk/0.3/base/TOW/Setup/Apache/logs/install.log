@@ -1,0 +1,74 @@
+Installing Apache HTTP 2.0 server with
+ DomainName =    localhost
+ ServerName =    tow.localhost
+ ServerAdmin =   admin@localhost
+ ServerPort =    8080
+ ServerSslPort = 8080
+ ServerRoot =    C:/TOW/Apache
+Rewrote C:/TOW/Apache/conf/default/httpd-autoindex.conf.in
+ to C:/TOW/Apache/conf/default/httpd-autoindex.conf
+Successfully removed C:\TOW\Apache\conf\default\httpd-autoindex.conf.in
+Rewrote C:/TOW/Apache/conf/default/httpd-vhosts.conf.in
+ to C:/TOW/Apache/conf/default/httpd-vhosts.conf
+Successfully removed C:\TOW\Apache\conf\default\httpd-vhosts.conf.in
+Rewrote C:/TOW/Apache/conf/default/httpd-default.conf.in
+ to C:/TOW/Apache/conf/default/httpd-default.conf
+Successfully removed C:\TOW\Apache\conf\default\httpd-default.conf.in
+Rewrote C:/TOW/Apache/conf/default/httpd-manual.conf.in
+ to C:/TOW/Apache/conf/default/httpd-manual.conf
+Successfully removed C:\TOW\Apache\conf\default\httpd-manual.conf.in
+Rewrote C:/TOW/Apache/conf/default/httpd-mpm.conf.in
+ to C:/TOW/Apache/conf/default/httpd-mpm.conf
+Successfully removed C:\TOW\Apache\conf\default\httpd-mpm.conf.in
+Rewrote C:/TOW/Apache/conf/default/httpd-info.conf.in
+ to C:/TOW/Apache/conf/default/httpd-info.conf
+Successfully removed C:\TOW\Apache\conf\default\httpd-info.conf.in
+Rewrote C:/TOW/Apache/conf/default/httpd-dav.conf.in
+ to C:/TOW/Apache/conf/default/httpd-dav.conf
+Successfully removed C:\TOW\Apache\conf\default\httpd-dav.conf.in
+Rewrote C:/TOW/Apache/conf/default/httpd-languages.conf.in
+ to C:/TOW/Apache/conf/default/httpd-languages.conf
+Successfully removed C:\TOW\Apache\conf\default\httpd-languages.conf.in
+Rewrote C:/TOW/Apache/conf/default/httpd-win.conf
+ to C:/TOW/Apache/conf/default/httpd.conf
+Successfully removed C:\TOW\Apache\conf\default\httpd-win.conf
+Rewrote C:/TOW/Apache/conf/default/httpd-userdir.conf.in
+ to C:/TOW/Apache/conf/default/httpd-userdir.conf
+Successfully removed C:\TOW\Apache\conf\default\httpd-userdir.conf.in
+Rewrote C:/TOW/Apache/conf/default/httpd-ssl.conf.in
+ to C:/TOW/Apache/conf/default/httpd-ssl.conf
+Successfully removed C:\TOW\Apache\conf\default\httpd-ssl.conf.in
+Rewrote C:/TOW/Apache/conf/default/httpd-multilang-errordoc.conf.in
+ to C:/TOW/Apache/conf/default/httpd-multilang-errordoc.conf
+Successfully removed C:\TOW\Apache\conf\default\httpd-multilang-errordoc.conf.in
+Duplicated C:/TOW/Apache/conf/default/magic
+ to C:/TOW/Apache/conf/magic
+Duplicated C:/TOW/Apache/conf/default/httpd-autoindex.conf
+ to C:/TOW/Apache/conf/extra/httpd-autoindex.conf
+Duplicated C:/TOW/Apache/conf/default/httpd-vhosts.conf
+ to C:/TOW/Apache/conf/extra/httpd-vhosts.conf
+Duplicated C:/TOW/Apache/conf/default/httpd-default.conf
+ to C:/TOW/Apache/conf/extra/httpd-default.conf
+Duplicated C:/TOW/Apache/conf/default/mime.types
+ to C:/TOW/Apache/conf/mime.types
+Duplicated C:/TOW/Apache/conf/default/charset.conv
+ to C:/TOW/Apache/conf/charset.conv
+Duplicated C:/TOW/Apache/conf/default/httpd-manual.conf
+ to C:/TOW/Apache/conf/extra/httpd-manual.conf
+Duplicated C:/TOW/Apache/conf/default/httpd-mpm.conf
+ to C:/TOW/Apache/conf/extra/httpd-mpm.conf
+Duplicated C:/TOW/Apache/conf/default/httpd-info.conf
+ to C:/TOW/Apache/conf/extra/httpd-info.conf
+Duplicated C:/TOW/Apache/conf/default/httpd-dav.conf
+ to C:/TOW/Apache/conf/extra/httpd-dav.conf
+Duplicated C:/TOW/Apache/conf/default/httpd-languages.conf
+ to C:/TOW/Apache/conf/extra/httpd-languages.conf
+Duplicated C:/TOW/Apache/conf/default/httpd.conf
+ to C:/TOW/Apache/conf/httpd.conf
+Duplicated C:/TOW/Apache/conf/default/httpd-userdir.conf
+ to C:/TOW/Apache/conf/extra/httpd-userdir.conf
+Duplicated C:/TOW/Apache/conf/default/httpd-ssl.conf
+ to C:/TOW/Apache/conf/extra/httpd-ssl.conf
+Duplicated C:/TOW/Apache/conf/default/httpd-multilang-errordoc.conf
+ to C:/TOW/Apache/conf/extra/httpd-multilang-errordoc.conf
+Successfully removed C:\TOW\Apache\conf\default\InstallConf22.awk
