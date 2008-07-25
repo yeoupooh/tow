@@ -24,7 +24,6 @@ if "%1"=="CREATE_SVN_REPO_USAGE" echo [TOW] Usage: %2 ^<ProjectName^>
 
 if "%1"=="TRAC_REPO_CREATED" echo [TOW] Trac repository[%2] created.
 if "%1"=="TRAC_INI_COPIED" echo [TOW] Initial trac.ini copied.
-if "%1"=="TRAC_BANNER_COPIED" echo [TOW] Trac banner image copied.
 if "%1"=="TRAC_ADMIN_SET" echo [TOW] Gave TRAC_ADMIN, XML_RPC permissions to admin account.
 if "%1"=="CREATE_TRAC_REPO_USAGE" echo [TOW] Usage: %2 ^<ProjectName^>
 
@@ -36,4 +35,3 @@ if "%1"=="ADD_REMOVE_PERM_USAGE" echo [TOW] Usage: %2 ^<ProjectName^> ^<UserName
 if "%1"=="LIST_PERM_USAGE" echo [TOW] Usage: %2 ^<ProjectName^> ^[UserName^]
 
 if "%1"=="ADD_PROJECT_USAGE" echo [TOW] Usage: %2 ^<ProjectName^>
-
