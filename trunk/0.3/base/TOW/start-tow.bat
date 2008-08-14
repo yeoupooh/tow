@@ -16,7 +16,6 @@ echo TOW_HOME    = %TOW_HOME%
 echo PYTHON_HOME = %PYTHON_HOME%
 echo APACHE_HOME = %APACHE_HOME%
 echo SVN_HOME    = %SVN_HOME%
-echo SQLITE_HOME = %SQLITE_HOME%
 echo.
 
 call lang LAUNCHED %TOW_NAME%
