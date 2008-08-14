@@ -20,7 +20,6 @@ set PYTHONPATH=%PYTHON_HOME%;%PYTHON_HOME%\DLLs;%PYTHON_HOME%\Scripts;%PYTHON_HO
 rem additional python path (not used)
 rem set PYTHONPATH=%PYTHONPATH%;%PYTHON_HOME%\Lib\lib-tk;%PYTHON_HOME%\Lib\site-packages;%PYTHON_HOME%\Lib\site-packages\mod_python
 set APACHE_HOME=%TOW_HOME%\Apache
-set SQLITE_HOME=%TOW_HOME%\SQLite
 
 set TOW_SETUP_HOME=%TOW_HOME%\Setup
 set TOW_TEST_PROJECT=HelloTOW
@@ -33,7 +32,7 @@ set TOW_TRAC_PRJ=%TOW_TRAC_REPO%\Projects
 
 if not "%TOW_SET_PATH%"=="" goto skip
 set TOW_SET_PATH=TRUE
-set PATH=%SVN_HOME%\bin;%PYTHONPATH%;%APACHE_HOME%\bin;%APACHE_HOME%\modules;%SQLITE_HOME%;%PATH%
+set PATH=%SVN_HOME%\bin;%PYTHONPATH%;%APACHE_HOME%\bin;%APACHE_HOME%\modules;%PATH%
 :skip
 
 echo TOW_HOME=%TOW_HOME%
