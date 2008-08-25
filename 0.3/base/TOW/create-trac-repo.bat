@@ -25,7 +25,7 @@ call trac-admin %1 initenv %_PROJECTNAME% %_DB% %_REPOSTYPE% %_REPOSPATH%
 call lang TRAC_REPO_CREATED %TOW_SVN_PRJ%\%1
 
 rem copy trac.ini file
-%PYTHON_HOME%\python rep-copy.py %_PROJECTNAME% %TOW_SETUP_HOME%\TracRepo\Projects\%TOW_TEST_PROJECT%\conf\trac-%TOW_PACKAGE%-%TOW_LANG%.ini.tpl "%TOW_TRAC_PRJ%\%1\conf\trac.ini"
+%PYTHONHOME%\python rep-copy.py %_PROJECTNAME% %TOW_SETUP_HOME%\TracRepo\Projects\%TOW_TEST_PROJECT%\conf\trac-%TOW_PACKAGE%-%TOW_LANG%.ini.tpl "%TOW_TRAC_PRJ%\%1\conf\trac.ini"
 call lang TRAC_INI_COPIED
 
 rem copy logo image
