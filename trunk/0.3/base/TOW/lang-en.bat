@@ -1,6 +1,6 @@
 @echo off
 
-set TOW_RES_LANG_NAME=Enlish
+set TOW_RES_LANG_NAME=English
 
 set TOW_RES_NAME=Name
 set TOW_RES_VERSION=Version
